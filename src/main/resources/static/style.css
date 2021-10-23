@@ -30,10 +30,9 @@ body {
     border: 1px solid grey ;
     display: block;
     color: white;
-    height: 42px; /* Some padding */
+    height: 45px; /* Some padding */
     width: 50px;
     cursor: pointer; /* Pointer/hand icon */
-
 }
 
 .add-btn button:hover {
@@ -84,9 +83,7 @@ body {
 }
 
 .object-box {
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin: 10px;
     height: 130px;
     width: 600px;
 }
@@ -110,6 +107,21 @@ body {
     border: 1px solid grey;
 }
 
+.container {
+    margin-top: 25px;
+    text-align: center;
+    width: 600px;
+    background-color: whitesmoke;
+}
+
+.content-box {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+    width: 600px;
+    background-color: whitesmoke;
+}
+
 .object-dlt-btn {
     font-size: 20px;
     background-color: red;
@@ -119,6 +131,26 @@ body {
     height: 65px; /* Some padding */
     width: 50px;
     cursor: pointer; /* Pointer/hand icon */
+}
+
+.object-title {
+
+}
+
+.object-desc {
+    height: 90px;
+}
+
+.object-price {
+    left:20px;
+    margin-bottom: 0;
+    color: green;
+}
+
+.form-box {
+    background-color: #02a9f4;
+    height: 500px;
+    width: 500px;
 }
 
 .object-conf-btn {

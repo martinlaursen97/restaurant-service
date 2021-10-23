@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <form action="#" th:action="@{/registerVerify}" th:object="${user}" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="username" th:field="*{username}"/><br>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="password" th:field="*{password}"/><br>
+                        </div>
+                        <button onclick="location.href='http://localhost:8080/login'" type="button" value="0" class="btn btn-primary">back</button>
+                        <button name="create" type="submit" value="0" class="btn btn-primary">create account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
