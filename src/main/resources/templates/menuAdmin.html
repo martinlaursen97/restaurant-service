@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="btn-box">
+        <button onclick="window.location.href = 'http://localhost:8080/'" class="logo">Logo</button>
+        <div class="center">
+            <div class="btn-group">
+                <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
+                <button>Orders</button>
+                <button>Users</button>
+                <button>Couriers</button>
+                <button>Statistics</button>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="center">
+        <button class="add-btn" onclick="window.location.href = 'http://localhost:8080/addProduct'">Add</button>
+        <div class="content-box">
+            <form th:action="@{/productSearch}" class="example" action="#">
+                <input type="text" placeholder="Search.." name="keyword">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+
+            <tr th:each="product: ${products}">
+                <div class="object-box" id="decenter">
+                    <img class="object-img" th:src="@{${product.getImageUrl()}}" alt=""/>
+                    <div class="object-text">
+                        <b>
+                        <td th:text="${product.getProductName()}"></td>
+                        </b>
+                        <br>
+                        <td th:text="${product.getProductDescription}"></td>
+                        <br>
+                        <b>
+                        <td th:text="${product.getPrice()}"> kr.</td> kr.
+                        </b>
+                    </div>
+                    <div class="object-options">
+                        <a th:href="@{/removeProduct(productId=${product.getProductId()})}" class="object-dlt-btn">D</a>
+                        <a th:href="@{/productConfig(productId=${product.getProductId()})}" class="object-conf-btn">D</a>
+                    </div>
+                </div>
+            </tr>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

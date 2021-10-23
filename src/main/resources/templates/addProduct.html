@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div class="btn-box">
+    <button onclick="window.location.href = 'http://localhost:8080/'" class="logo">Logo</button>
+    <div class="center">
+        <div class="btn-group">
+            <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
+            <button>Orders</button>
+            <button>Users</button>
+            <button>Couriers</button>
+            <button>Statistics</button>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="center">
+    <div class="content-box">
+        <form action="#" th:action="@{/productVerify}" th:object="${product}" method="POST">
+            <input type="text" name="name" th:field="*{productName}"/><br>
+            <input type="number" name="price" th:field="*{price}"/><br>
+            <input type="text" name="url" th:field="*{imageUrl}"/><br>
+            <input type="text" name="description" th:field="*{productDescription}"/><br>
+            <button name="post" type="submit" value="0" class="btn btn-primary">post</button>
+            <button onclick="location.href='http://localhost:8080/menu'" type="button" value="0" class="btn btn-primary">back</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+
+</html>
