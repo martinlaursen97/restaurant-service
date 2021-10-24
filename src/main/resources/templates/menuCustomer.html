@@ -8,6 +8,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="test.js"></script>
 </head>
 
 <body>
@@ -52,7 +53,7 @@
 
         <tr th:each="product: ${products}">
             <div class="object-box" id="decenter">
-                <img class="object-img" th:src="@{${product.getImageUrl()}}" alt=""/>
+                <img class="object-img" th:src="@{${product.getImageUrl()}}" alt="" src=""/>
                 <div class="object-text">
                     <div class="object-title">
                         <b>
@@ -71,7 +72,29 @@
                     </div>
                 </div>
                 <div class="object-options">
-                    <a th:href="@{/orderProduct(productName=${product.getProductName()})}" class="object-pick-btn"></a>
+
+                    <button class="guga" th:onclick="'javascript:pushData(\'' + ${product.getProductId()} + '\');'" th:value="${product.getProductId()}">test</button>
+                    <p id="checks"></p>
+
+                    <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        const arr = [];
+
+                        function pushData(data) {
+
+                            arr.push(data);
+//
+                            var pval = "";
+//
+                            for(var i = 0; i < arr.length; i++) {
+                                pval += arr[i] + "<br>";
+                            }
+//
+                            document.getElementById("checks").innerHTML = pval;
+                        }
+
+                        /*]]>*/
+                    </script>
                 </div>
             </div>
         </tr>
