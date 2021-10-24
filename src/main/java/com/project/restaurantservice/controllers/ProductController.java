@@ -29,7 +29,7 @@ public class ProductController {
     @RequestMapping(value = "/removeProduct", method = RequestMethod.GET)
     public String removeProduct(@RequestParam(name="productId") Long productId) {
         productService.removeProductById(productId);
-        return "redirect:/menu";
+        return "redirect:/menuAdmin";
     }
 
     @PostMapping("/productVerify")
@@ -46,7 +46,7 @@ public class ProductController {
             product.setImageUrl("https://baregomad.dk/wp-content/uploads/2020/11/pasta-alla-norma.jpg");
         }
         productService.addNewProduct(product);
-        return "redirect:/menu";
+        return "redirect:/menuAdmin";
     }
 
     @PostMapping("/productConfigVerify")
@@ -65,7 +65,7 @@ public class ProductController {
 
         product.setProductId(hack);
         productService.saveConfig(product);
-        return "redirect:/menu";
+        return "redirect:/menuAdmin";
     }
 
     // ... :/
@@ -78,10 +78,16 @@ public class ProductController {
         return "productConfig";
     }
 
-    @RequestMapping("/menu")
-    public String menu(Model model) {
+    @RequestMapping("/menuAdmin")
+    public String menuAdmin(Model model) {
         model.addAttribute("products", productService.getProducts());
         return "menuAdmin";
+    }
+
+    @RequestMapping("/menuCustomer")
+    public String menuCustomer(Model model) {
+        model.addAttribute("products", productService.getProducts());
+        return "menuCustomer";
     }
 
     @RequestMapping(value = "/productSearch", method = RequestMethod.GET)

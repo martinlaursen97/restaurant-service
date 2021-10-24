@@ -21,23 +21,9 @@ public class OrderService {
     }
 
     public void test() {
-        User user = new User("martin", "laursen", "martin_laursen9@hotmail.com", "vejledalen 12, 2.tv", "ishøj", "2635", "42217458");
-        Courier courier = new Courier("kenned", "larsen", "2635");
 
 
 
-
-        Date dt = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Order order = new Order(
-                user.getUserId(),
-                courier.getCourierId(),
-                user.getStreet(),
-                user.getCity(),
-                user.getZip(),
-                sdf.format(dt));
-
-        orderRepository.save(order);
     }
 
     public void addNewOrder(Order order) {

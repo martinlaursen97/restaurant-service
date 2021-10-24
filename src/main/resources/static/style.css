@@ -96,9 +96,47 @@ body {
 
 .object-options {
     margin-left: 10px;
-    background-color: grey;
     height: 130px;
     width: 50px;
+}
+
+.object-pick-btn {
+    font-size: 20px;
+    background-color: #007ac1;
+    border: 1px solid grey ;
+    display: block;
+    color: white;
+    height: 50px; /* Some padding */
+    width: 50px;
+    cursor: pointer; /* Pointer/hand icon */
+}
+
+.order-box {
+    position:absolute;
+    display: block;
+    width: 300px;
+    height: 500px;
+    margin-top: 25px;
+    margin-left: 925px;
+    background-color: whitesmoke;
+}
+
+.order-box-header {
+    height: 45px;
+    background-color: #007ac1;
+}
+
+.order-box-content {
+    height: 410px;
+}
+
+.order-box-footer {
+    height: 45px;
+    background-color: #007ac1;
+}
+
+.order-btn {
+
 }
 
 .object-img {

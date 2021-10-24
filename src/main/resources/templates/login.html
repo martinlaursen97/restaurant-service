@@ -8,28 +8,35 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-<div class="container">
-    <div class="row justify-content-center align-items-center" style="height:100vh">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    <form action="#" th:action="@{/loginVerify}" th:object="${user}" method="GET">
+
+<body style="background-color: #007ac1">
+    <div class="btn-box"></div>
+    <div class="center">
+        <div class="container">
+            <form action="#" th:action="@{/loginVerify}" th:object="${user}" method="POST">
+                <div class="col">
+                    <div class="col">
                         <div class="form-group">
-                            <input type="text" name="username" th:field="*{username}"/><br>
+                            <label for="username" class="control-label">Username</label>
+                            <input type="text" class="form-control" id="username" placeholder="username" th:field="*{username}"/><br>
                         </div>
+                    </div>
+                    <div class="col">
                         <div class="form-group">
-                            <input type="text" name="password" th:field="*{password}"/><br>
+                            <label for="password" class="control-label">Password</label>
+                            <input type="text" class="form-control" id="password" placeholder="password" th:field="*{password}"/><br>
                         </div>
-                        <button name="login" type="submit" value="0" class="btn btn-primary">Login</button>
-                        <button onclick="location.href='http://localhost:8080/register'" type="button" value="0" class="btn btn-primary">Register</button>
-                    </form>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <button name="login" type="submit" value="0" class="btn btn-primary">login</button>
+                            <button onclick="location.href='http://localhost:8080/register'" type="button" value="0" class="btn btn-primary">register</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-</div>
-
 </body>
 </html>

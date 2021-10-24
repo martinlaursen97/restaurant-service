@@ -33,6 +33,9 @@ public class User {
     @Column(name="phone_number")
     private String phoneNumber;
 
+    @Column(name="user_role")
+    private Long userRole;
+
     public User() { }
 
     public User(String username,
@@ -41,7 +44,8 @@ public class User {
                 String street,
                 String city,
                 String zip,
-                String phoneNumber) {
+                String phoneNumber,
+                Long userRole) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -49,6 +53,7 @@ public class User {
         this.city = city;
         this.zip = zip;
         this.phoneNumber = phoneNumber;
+        this.userRole = userRole;
     }
 
     public Long getUserId() {
@@ -113,6 +118,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Long getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(Long userRole) {
+        this.userRole = userRole;
     }
 
     @Override

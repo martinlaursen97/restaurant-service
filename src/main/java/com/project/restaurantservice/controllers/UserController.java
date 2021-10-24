@@ -30,21 +30,26 @@ public class UserController {
     @RequestMapping("/loginVerify")
     public String loginVerify(User user, Model model) {
         if (userService.correctDetails(user)) {
+            user = userService.findUserByName(user.getUsername());
             model.addAttribute("user", user);
-            return "index";
+            if (user.getUserRole() == 1) {
+                return "redirect:/menuCustomer";
+            } else {
+                return "redirect:/menuAdmin";
+            }
         }
         return "login";
     }
-
+//
     @PostMapping("/registerVerify")
     public String registerVerify(User user) {
         if (!userService.usernameTaken(user)) {
             userService.addNewUser(user);
-            return "success";
+            return "registerSuccess";
         }
         return "register";
     }
-
+//
     @RequestMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
