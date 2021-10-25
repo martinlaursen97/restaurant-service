@@ -16,52 +16,52 @@
     <div class="btn-box"></div>
     <div class="center">
         <div class="container">
-            <form action="#" th:action="@{/registerVerify}" th:object="${user}" method="POST">
+            <form name="register" action="/register" method="POST">
                 <div class="col">
                     <div class="col">
                         <div class="form-group">
                             <label for="username" class="control-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="username" th:field="*{username}"/><br>
+                            <input type="text" class="form-control" id="username" placeholder="username"/><br>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="password" class="control-label">Password</label>
-                            <input type="text" class="form-control" id="password" placeholder="password" th:field="*{password}"/><br>
+                            <input type="text" class="form-control" id="password" placeholder="password"/><br>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="email" class="control-label">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="email" th:field="*{email}"/><br>
+                            <input type="text" class="form-control" id="email" placeholder="email"/><br>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="form-group">
                             <label for="street" class="control-label">Street</label>
-                            <input type="text" class="form-control" id="street" placeholder="street" th:field="*{street}"/><br>
+                            <input type="text" class="form-control" id="street" placeholder="street"/><br>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="form-group">
                             <label for="city" class="control-label">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="city" th:field="*{city}"/><br>
+                            <input type="text" class="form-control" id="city" placeholder="city"/><br>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="form-group">
                             <label for="zip" class="control-label">Zip</label>
-                            <input type="text" class="form-control" id="zip" placeholder="zip" th:field="*{zip}"/><br>
+                            <input type="text" class="form-control" id="zip" placeholder="zip"/><br>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="form-group">
-                            <label for="phone" class="control-label">Zip</label>
-                            <input type="text" class="form-control" id="phone" placeholder="phone" th:field="*{phoneNumber}"/><br>
+                            <label for="phone" class="control-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" placeholder="phone"/><br>
                         </div>
                     </div>
 

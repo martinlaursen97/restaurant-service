@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.repositories.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -40,5 +42,18 @@ public class ProductService {
 
     public List<Product> searchFor(String keyword) {
         return productRepository.searchFor(keyword);
+    }
+
+    public List<Product> getProductsName(String[] data) {
+        List<Product> products = new ArrayList<>();
+        for (String d : data) {
+            Long id = Long.parseLong(d);
+            Product product = productRepository.findById(id)
+                    .orElseThrow(() -> new IllegalStateException(
+                            "id: " + id + ", does not exist.")
+                    );
+            products.add(product);
+        }
+        return products;
     }
 }

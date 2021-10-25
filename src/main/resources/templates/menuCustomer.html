@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
+        <button class="dropbtn" th:text="${session.user.username}">Dropdown</button>
         <div class="dropdown-content">
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
@@ -39,14 +39,15 @@
 
         </div>
         <div class="order-box-content">
-
+            <p id="checks"></p>
         </div>
         <div class="order-box-footer">
-
+            <button onclick="window.location.href = 'http://localhost:8080/finish1'">Finish</button>
+            <button></button>
         </div>
     </div>
     <div class="content-box">
-        <form th:action="@{/productSearch}" class="example" action="#">
+        <form th:action="@{/search}" class="example" action="#">
             <input type="text" placeholder="Search.." name="keyword">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
@@ -74,27 +75,27 @@
                 <div class="object-options">
 
                     <button class="guga" th:onclick="'javascript:pushData(\'' + ${product.getProductId()} + '\');'" th:value="${product.getProductId()}">test</button>
-                    <p id="checks"></p>
+
 
                     <script th:inline="javascript">
-                        /*<![CDATA[*/
                         const arr = [];
 
                         function pushData(data) {
-
-
                             arr.push(data);
-//
                             var pval = "";
-//
                             for(var i = 0; i < arr.length; i++) {
                                 pval += arr[i] + "<br>";
                             }
-//
-                            document.getElementById("checks").innerHTML = pval;
-                        }
 
-                        /*]]>*/
+                            document.getElementById("checks").innerHTML = pval;
+
+                            $.ajax({
+                                contentType: "application/json",
+                                type: "POST",
+                                data: JSON.stringify(arr),
+                                url: "/finish2",
+                            });
+                        }
                     </script>
                 </div>
             </div>

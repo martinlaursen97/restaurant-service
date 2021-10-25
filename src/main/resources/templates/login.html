@@ -14,18 +14,18 @@
     <div class="btn-box"></div>
     <div class="center">
         <div class="container">
-            <form action="#" th:action="@{/loginVerify}" th:object="${user}" method="POST">
+            <form name="login" action="/login" method="POST">
                 <div class="col">
                     <div class="col">
                         <div class="form-group">
                             <label for="username" class="control-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="username" th:field="*{username}"/><br>
+                            <input type="text" class="form-control" name="username" id="username" value="admin1">
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="password" class="control-label">Password</label>
-                            <input type="text" class="form-control" id="password" placeholder="password" th:field="*{password}"/><br>
+                            <label for="password" class="control-label">Username</label>
+                            <input type="text" class="form-control" name="password" id="password" value="123321">
                         </div>
                     </div>
                     <div class="col">

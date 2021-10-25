@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.project.restaurantservice.services.ProductService;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ProductController {
@@ -71,7 +73,8 @@ public class ProductController {
     // ... :/
     private Long hack = 0L;
     @RequestMapping(value = "/productConfig", method = RequestMethod.GET)
-    public String productConfig(@RequestParam(name="productId") Long productId, Model model) {
+    public String productConfig(WebRequest request, Model model) {
+        Long productId = Long.parseLong(Objects.requireNonNull(request.getParameter("productId")));
         Product product = productService.getById(productId);
         hack = product.getProductId();
         model.addAttribute("product", product);
@@ -90,10 +93,23 @@ public class ProductController {
         return "menuCustomer";
     }
 
-    @RequestMapping(value = "/productSearch", method = RequestMethod.GET)
-    public String productSearch(@RequestParam(name="keyword") String keyword, Model model) {
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String productSearch(WebRequest request, Model model) {
+        String keyword = request.getParameter("keyword");
         List<Product> products = productService.searchFor(keyword);
         model.addAttribute("products2", products);
         return "productSearch";
+    }
+
+    @RequestMapping("/finish1")
+    public String finishOrder(Model model) {
+        model.addAttribute("products", hack2);
+        return "finishOrder";
+    }
+
+    List<Product> hack2;
+    @RequestMapping(value = "/finish2", method = RequestMethod.POST)
+    public void chosenProducts(@RequestBody(required = false) String[] data) {
+        hack2 = productService.getProductsName(data);
     }
 }

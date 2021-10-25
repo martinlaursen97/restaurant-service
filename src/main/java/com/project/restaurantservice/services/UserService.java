@@ -18,17 +18,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addNewUser(User user) {
-        userRepository.save(user);
-    }
-
-    public boolean usernameTaken(User user) {
-        Optional<User> userOptional = userRepository.findUserByName(user.getUsername());
+    public boolean usernameTaken(String username) {
+        Optional<User> userOptional = userRepository.findUserByName(username);
         return userOptional.isPresent();
     }
 
-    public boolean correctDetails(User user) {
-        Optional<User> userOptional = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    public boolean correctDetails(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, password);
         return userOptional.isPresent();
     }
 
@@ -38,6 +34,17 @@ public class UserService {
 
     public User findUserByName(String username) {
         return userRepository.findUserByName2(username);
+    }
+
+    public void addNewUser(String username,
+                           String password,
+                           String email,
+                           String street,
+                           String city,
+                           String zip,
+                           String phone) {
+        User user = new User(username, password, email, street, city, zip, phone, 1L);
+        userRepository.save(user);
     }
 }
 

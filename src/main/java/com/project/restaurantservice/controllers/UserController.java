@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -21,38 +25,35 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("user", new User());
+    @PostMapping("/login")
+    public String login(WebRequest request)  {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        User user = userService.findUserByName(username);
+        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+        System.out.println(username);
+        System.out.println(password);
+        if (userService.correctDetails(username, password)) {
+            return "menuCustomer";
+        }
         return "login";
     }
 
-    @RequestMapping("/loginVerify")
-    public String loginVerify(User user, Model model) {
-        if (userService.correctDetails(user)) {
-            user = userService.findUserByName(user.getUsername());
-            model.addAttribute("user", user);
-            if (user.getUserRole() == 1) {
-                return "redirect:/menuCustomer";
-            } else {
-                return "redirect:/menuAdmin";
-            }
+    @PostMapping("/register")
+    public String register(WebRequest request) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String street = request.getParameter("street");
+        String city = request.getParameter("city");
+        String zip = request.getParameter("zip");
+        String phone = request.getParameter("phone");
+
+        if (!userService.usernameTaken(username)) {
+            userService.addNewUser(username, password, email, street, city, zip, phone);
+            return "login";
         }
-        return "login";
-    }
-//
-    @PostMapping("/registerVerify")
-    public String registerVerify(User user) {
-        if (!userService.usernameTaken(user)) {
-            userService.addNewUser(user);
-            return "registerSuccess";
-        }
-        return "register";
-    }
-//
-    @RequestMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("user", new User());
         return "register";
     }
 }
