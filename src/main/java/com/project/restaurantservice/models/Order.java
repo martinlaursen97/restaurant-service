@@ -54,6 +54,18 @@ public class Order {
         this.orderDate = orderDate;
     }
 
+    public Order(Long customerId,
+                 String toStreet,
+                 String toCity,
+                 String toZip,
+                 String orderDate) {
+        this.customerId = customerId;
+        this.toStreet = toStreet;
+        this.toCity = toCity;
+        this.toZip = toZip;
+        this.orderDate = orderDate;
+    }
+
     public Long getOrderNumber() {
         return orderNumber;
     }

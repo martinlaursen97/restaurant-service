@@ -22,22 +22,19 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public void test() {
-
-
-
+    public Long addNewOrder(Long userId, String street, String city, String zip, String dateStr) {
+        Order order = new Order(userId, street, city, zip, dateStr);
+        System.out.println(order);
+        return orderRepository.save(order).getOrderNumber();
     }
 
-    public void addNewOrder(Order order) {
-        orderRepository.save(order);
+    public void assignCourier(String zip, Long orderNumber) {
+        orderRepository.assignCourierByZipAndOrderNumber(zip, orderNumber);
     }
 
-    public void addNewOrder(User user, List<Product> chosenProducts) {
-
-    }
-
-    public void addNewOrder(Long userId, Long courierId, String street, String city, String zip, String dateStr) {
-        Order order = new Order(userId, courierId, street, city, zip, dateStr);
-        orderRepository.save(order);
+    public void assignOrderProducts(List<Product> chosenProducts, Long orderNumber) {
+        for (Product p : chosenProducts) {
+            orderRepository.assignOrderProducts(p.getProductId(), orderNumber);
+        }
     }
 }

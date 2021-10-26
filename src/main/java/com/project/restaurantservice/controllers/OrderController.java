@@ -4,9 +4,14 @@ package com.project.restaurantservice.controllers;
 import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.restaurantservice.services.OrderService;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
 import java.text.SimpleDateFormat;
@@ -29,11 +34,11 @@ public class OrderController {
     }
 
     @RequestMapping("/finish")
-    public String finish(WebRequest request) {
+    public String finish(WebRequest request, Model model) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        List<Product> chosenProducts = (List<Product>) request.getAttribute("chosen", WebRequest.SCOPE_SESSION);
 
         Long userId = user.getUserId();
-        Long courierId = 404L;
         String street = user.getStreet();
         String city = user.getCity();
         String zip = user.getZip();
@@ -43,8 +48,9 @@ public class OrderController {
 
         String dateStr = formatter.format(dateNow);
 
-        orderService.addNewOrder(userId, courierId, street, city, zip, dateStr);
-
+        Long orderNumber = orderService.addNewOrder(userId, street, city, zip, dateStr);
+        orderService.assignCourier(user.getZip(), orderNumber);
+        orderService.assignOrderProducts(chosenProducts, orderNumber);
 
         return "finish";
     }

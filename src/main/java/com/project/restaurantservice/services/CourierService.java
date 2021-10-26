@@ -18,4 +18,5 @@ public class CourierService {
     public void addNewCourier(Courier courier) {
         courierRepository.save(courier);
     }
+
 }

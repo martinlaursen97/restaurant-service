@@ -61,15 +61,6 @@ public class UserController {
         String zip = request.getParameter("zip");
         String phone = request.getParameter("phone");
 
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println(email);
-        System.out.println(street);
-        System.out.println(city);
-        System.out.println(zip);
-        System.out.println(phone);
-        System.out.println(request);
-
         if (username == null ||
                 password == null||
                 email == null ||

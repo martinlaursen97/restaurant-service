@@ -132,12 +132,12 @@ public class ProductController {
         List<Product> chosenProducts = (List<Product>) request.getAttribute("chosen", WebRequest.SCOPE_SESSION);
         model.addAttribute("products", chosenProducts);
         model.addAttribute("total", productService.getTotal(chosenProducts));
-
         return "showOrder";
     }
 
     @PostMapping("/chosen")
-    public void chosenProducts(@RequestBody(required = false) String[] data, WebRequest request) {
+    public String chosenProducts(@RequestBody(required = false) String[] data, WebRequest request) {
         request.setAttribute("chosen", productService.getProductsName(data), WebRequest.SCOPE_SESSION);
+        return "showOrder";
     }
 }
