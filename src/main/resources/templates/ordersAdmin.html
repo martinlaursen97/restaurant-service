@@ -2,13 +2,12 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add</title>
+    <title>Orders</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="test.js"></script>
 </head>
 
 <body>
@@ -34,69 +33,31 @@
 </div>
 
 <div class="center">
-    <div class="order-box">
-        <div class="order-box-header">
-
-        </div>
-        <div class="order-box-content">
-            <p id="checks"></p>
-        </div>
-        <div class="order-box-footer">
-            <button onclick="window.location.href = 'http://localhost:8080/showOrder'">Finish</button>
-        </div>
-    </div>
     <div class="content-box">
-        <form th:action="@{/search}" class="example" action="#">
+        <form th:action="@{/searchOrder}" class="example" action="#">
             <input type="text" placeholder="Search.." name="keyword">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
 
-        <tr th:each="product: ${products}">
+        <tr th:each="order : ${orders}">
             <div class="object-box" id="decenter">
-                <img class="object-img" th:src="@{${product.getImageUrl()}}" alt="" src=""/>
+                <div class="object-img" th:text="${order.getOrderNumber()}" alt=""></div>
                 <div class="object-text">
                     <div class="object-title">
                         <b>
-                            <td th:text="${product.getProductName()}"></td>
+                            <td th:text="${order.getOrderDate()}"></td>
                         </b>
                     </div>
                     <div class="object-desc">
                         <br>
-                        <td th:text="${product.getProductDescription}"></td>
+                        <td th:text="${order.getCourierId()}"></td>
                         <br>
                     </div>
                     <div class="object-price">
                         <b>
-                            <td th:text="${product.getPrice()}"></td> kr.
+                            <td th:text="${order.getCustomerId()}"></td> kr.
                         </b>
                     </div>
-                </div>
-                <div class="object-options">
-
-                    <button class="guga" th:onclick="'javascript:pushData(\'' + ${product.getProductId()} + '\');'" th:value="${product.getProductId()}">test</button>
-
-
-                    <script th:inline="javascript">
-                        const arr = [];
-
-                        function pushData(data) {
-                            arr.push(data);
-                            var pval = "";
-                            for(var i = 0; i < arr.length; i++) {
-                                pval += arr[i] + "<br>";
-                            }
-
-                            document.getElementById("checks").innerHTML = pval;
-
-                            $.ajax({
-
-                                contentType: "application/json",
-                                type: "POST",
-                                data: JSON.stringify(arr),
-                                url: "/chosen",
-                            });
-                        }
-                    </script>
                 </div>
             </div>
         </tr>

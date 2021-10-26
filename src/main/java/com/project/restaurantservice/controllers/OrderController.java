@@ -1,6 +1,7 @@
 package com.project.restaurantservice.controllers;
 
 
+import com.project.restaurantservice.models.Order;
 import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,30 @@ public class OrderController {
         model.addAttribute("date", date);
 
         return "finishOrder";
+    }
+
+    @RequestMapping("/orders")
+    public String showOrders(WebRequest request, Model model) {
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Long roleId = user.getUserRole();
+        Long userId = user.getUserId();
+
+        if (roleId == 1L) {
+            List<Order> orders = orderService.getOrdersById(userId);
+            model.addAttribute("orders", orders);
+            return "ordersCustomer";
+        } else {
+            List<Order> orders = orderService.getAllOrders();
+            model.addAttribute("orders", orders);
+            return "ordersAdmin";
+        }
+    }
+
+    @RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
+    public String orderSearch(WebRequest request, Model model) {
+        String keyword = request.getParameter("keyword");
+        Order order = orderService.searchFor(keyword);
+        model.addAttribute("products2", order);
+        return "orderSearch";
     }
 }

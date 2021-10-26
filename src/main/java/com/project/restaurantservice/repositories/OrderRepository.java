@@ -24,4 +24,10 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Modifying
     @Query(value = "INSERT INTO restaurant.order_products (product_id, order_number) VALUES(?1, ?2)", nativeQuery = true)
     void assignOrderProducts(Long productId, Long orderNumber);
+
+    @Query(value = "SELECT o FROM Order o WHERE o.customerId = ?1")
+    List<Order> getOrdersById(Long userId);
+
+    @Query("SELECT o FROM Order o WHERE o.orderNumber = ?1")
+    Order searchFor(Long keyword);
 }

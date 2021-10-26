@@ -39,9 +39,12 @@
             Order Number #<td th:text="${orderNumber}"></td>
         </div>
         <div class="order-finished-content">
-            <p>Successfully placed on:/p>
 
             <td th:text="${date}"></td>
+            <br>
+            <b>
+            Your order is on its way!
+            </b>
         </div>
         <button class="order-finished-btn" onclick="window.location.href = 'http://localhost:8080/menu'">Back</button>
     </div>

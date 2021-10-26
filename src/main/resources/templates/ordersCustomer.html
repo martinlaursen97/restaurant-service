@@ -2,13 +2,12 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add</title>
+    <title>Orders</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="test.js"></script>
 </head>
 
 <body>
@@ -17,14 +16,14 @@
     <div class="center">
         <div class="btn-group">
             <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
-            <button>Orders</button>
+            <button onclick="window.location.href = 'http://localhost:8080/orders'">Orders</button>
             <button>Users</button>
             <button>Couriers</button>
             <button>Statistics</button>
         </div>
     </div>
     <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
+        <button class="dropbtn" th:text="${session.user.username}">Dropdown</button>
         <div class="dropdown-content">
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
@@ -34,26 +33,22 @@
 </div>
 
 <div class="center">
-    <div class="order-box-big">
-        <div class="order-box-header">
+    <div class="content-box">
+        <form th:action="@{/searchOrder}" class="example" action="#">
+            <input type="text" placeholder="Search.." name="keyword">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
 
-        </div>
-        <div class="order-box-content">
-            <tr th:each="product: ${products}">
-
-                #<td th:text="${product.getProductId()}"></td>.......
-                <td th:text="${product.getProductName()}"></td>.......
-                <td th:text="${product.getPrice()}"></td> kr.
-                <br>
-            </tr>
-            <br>
-            Total: <td th:text="${total}"></td> kr.
-        </div>
-        <div class="order-box-footer">
-            <button onclick="window.location.href = 'http://localhost:8080/finish'">Purchase</button>
-        </div>
+        <tr th:each="order : ${orders}">
+            <a th:href="@{/inspect(orderNumber=${order.getOrderNumber()})}" class="show-order-box" id="decenter">
+                Order number: #<b><td th:text="${order.getOrderNumber()}" alt=""></td></b>
+                , date: #<b><td th:text="${order.getOrderDate()}"></td></b>
+            </a>
+        </tr>
 
     </div>
 </div>
+
 </body>
+
 </html>

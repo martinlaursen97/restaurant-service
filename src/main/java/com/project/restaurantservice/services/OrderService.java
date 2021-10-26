@@ -7,6 +7,10 @@ import com.project.restaurantservice.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.restaurantservice.models.User;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,5 +40,17 @@ public class OrderService {
         for (Product p : chosenProducts) {
             orderRepository.assignOrderProducts(p.getProductId(), orderNumber);
         }
+    }
+
+    public List<Order> getOrdersById(Long userId) {
+        return orderRepository.getOrdersById(userId);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public Order searchFor(String keyword) {
+        return orderRepository.searchFor(Long.parseLong(keyword));
     }
 }
