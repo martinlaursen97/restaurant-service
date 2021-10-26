@@ -33,35 +33,59 @@
 </div>
 
 <div class="center">
-    <div class="content-box">
-        <form th:action="@{/searchOrder}" class="example" action="#">
-            <input type="text" placeholder="Search.." name="keyword">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+    <div class="order-finished-container2">
+        <div class="order-finished-header">
+            Order Number: #<td th:text="${order.getOrderNumber()}"></td>
+        </div>
 
-        <tr th:each="order : ${orders}">
-            <div class="object-box" id="decenter">
-                <div class="object-img" th:text="${order.getOrderNumber()}" alt=""></div>
-                <div class="object-text">
-                    <div class="object-title">
-                        <b>
-                            <td th:text="${order.getOrderDate()}"></td>
-                        </b>
-                    </div>
-                    <div class="object-desc">
-                        <br>
-                        <td th:text="${order.getCourierId()}"></td>
-                        <br>
-                    </div>
-                    <div class="object-price">
-                        <b>
-                            <td th:text="${order.getCustomerId()}"></td> kr.
-                        </b>
-                    </div>
-                </div>
+        <h4>Order details:</h4>
+            <div class="row">
+                Customer ID: #<td th:text="${order.getCustomerId()}"></td>
             </div>
-        </tr>
 
+            <div class="row">
+                Courier ID: #<td th:text="${order.getCourierId()}"></td>
+            </div>
+
+            <div class="row">
+                Date: <td th:text="${order.getOrderDate()}"></td>
+            </div>
+
+            <div class="row">
+                City: <td th:text="${order.getToCity()}"></td>
+            </div>
+
+            <div class="row">
+                Street: <td th:text="${order.getToStreet()}"></td>
+            </div>
+
+            <div class="row">
+                Zip: <td th:text="${order.getToZip()}"></td>
+            </div>
+
+
+            <h4>Order products:</h4>
+            <tr th:each="product : ${products}">
+
+                <div class="row">
+                Product name: <td th:text="${product.getProductName()}"></td>
+                </div>
+
+
+                <div class="row">
+                Price: <td th:text="${product.getPrice()}"></td> kr.
+                </div>
+
+            </tr>
+
+            <h4>Total:</h4>
+            <div class="row">
+            <td style="color: forestgreen" th:text="${total}"></td> kr.
+                </div>
+
+            <button onclick="window.location.href = 'http://localhost:8080/orders'" class="order-finished-btn2">Back</button>
+
+        </div>
     </div>
 </div>
 

@@ -67,4 +67,8 @@ public class ProductService {
         }
         return total;
     }
+
+    public List<Product> getProductsById(List<Long> productIds) {
+        return productRepository.findAllById(productIds);
+    }
 }

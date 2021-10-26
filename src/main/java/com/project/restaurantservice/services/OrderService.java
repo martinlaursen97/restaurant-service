@@ -46,11 +46,19 @@ public class OrderService {
         return orderRepository.getOrdersById(userId);
     }
 
+    public Order findByOrderNumber(Long orderNumber) {
+        return orderRepository.findByOrderNumber(orderNumber);
+    }
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
     public Order searchFor(String keyword) {
         return orderRepository.searchFor(Long.parseLong(keyword));
+    }
+
+    public List<Long> getOrderProducts(Long orderNumber) {
+        return orderRepository.getOrderProducts(orderNumber);
     }
 }

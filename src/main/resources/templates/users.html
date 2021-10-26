@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orders</title>
+    <title>Add</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -17,13 +17,13 @@
         <div class="btn-group">
             <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
             <button onclick="window.location.href = 'http://localhost:8080/orders'">Orders</button>
-            <button>Users</button>
-            <button>Couriers</button>
-            <button>Statistics</button>
+            <button onclick="window.location.href = 'http://localhost:8080/users'">Users</button>
+            <button onclick="window.location.href = 'http://localhost:8080/couriers'">Couriers</button>
+            <button onclick="window.location.href = 'http://localhost:8080/statistics'">Statistics</button>
         </div>
     </div>
     <div class="dropdown">
-        <button class="dropbtn" th:text="${session.user.username}">Dropdown</button>
+        <button class="dropbtn">Dropdown</button>
         <div class="dropdown-content">
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
@@ -34,21 +34,20 @@
 
 <div class="center">
     <div class="content-box">
-        <form th:action="@{/searchOrder}" class="example" action="#">
-            <input type="text" placeholder="Search.." name="keyword">
+        <form th:action="@{/userSearch}" class="example" action="#">
+            <input type="text" placeholder="Search.." name="id">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
 
-        <tr th:each="order : ${orders}">
-            <a th:href="@{/inspect(orderNumber=${order.getOrderNumber()})}" class="show-order-box" id="decenter">
-                Order number: #<b><td th:text="${order.getOrderNumber()}" alt=""></td></b>
-                , date: #<b><td th:text="${order.getOrderDate()}"></td></b>
+        <tr th:each="user : ${users}">
+            <a th:href="@{/inspectUser(userId=${user.getUserId()})}" class="show-order-box" id="decenter">
+                User ID: #<b><td th:text="${user.getUserId()}" alt=""></td></b>
+                , username: #<b><td th:text="${user.getUsername()}"></td></b>
             </a>
         </tr>
 
     </div>
 </div>
-
 </body>
 
 </html>

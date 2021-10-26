@@ -2,13 +2,12 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add</title>
+    <title>Orders</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="test.js"></script>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
         </div>
     </div>
     <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
+        <button class="dropbtn" th:text="${session.user.username}">Dropdown</button>
         <div class="dropdown-content">
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
@@ -34,26 +33,51 @@
 </div>
 
 <div class="center">
-    <div class="order-box-big">
-        <div class="order-box-header">
-
-        </div>
-        <div class="order-box-content">
-            <tr th:each="product: ${products}">
-
-                #<td th:text="${product.getProductId()}"></td>.......
-                <td th:text="${product.getProductName()}"></td>.......
-                <td th:text="${product.getPrice()}"></td> kr.
-                <br>
-            </tr>
-            <br>
-            Total: <td th:text="${total}"></td> kr.
-        </div>
-        <div class="order-box-footer">
-            <button onclick="window.location.href = 'http://localhost:8080/finish'">Purchase</button>
+    <div class="order-finished-container2">
+        <div class="order-finished-header">
+            User ID: #<td th:text="${user.getUserId()}"></td>
         </div>
 
+        <h4>User details:</h4>
+
+        <div class="row">
+            Username: <td th:text="${user.getUsername()}"></td>
+        </div>
+
+        <div class="row">
+            Password: <td th:text="${user.getPassword()}"></td>
+        </div>
+
+        <div class="row">
+            Email: <td th:text="${user.getEmail()}"></td>
+        </div>
+
+        <div class="row">
+            Street: <td th:text="${user.getStreet()}"></td>
+        </div>
+
+        <div class="row">
+            City: <td th:text="${user.getCity()}"></td>
+        </div>
+
+        <div class="row">
+            Zip: <td th:text="${user.getZip()}"></td>
+        </div>
+
+        <div class="row">
+            Phone number: <td th:text="${user.getPhoneNumber()}"></td>
+        </div>
+
+        <div class="row">
+            Access level: <td th:text="${user.getUserRole()}"></td>
+        </div>
+
+
+        <button onclick="window.location.href = 'http://localhost:8080/users'" class="order-finished-btn2">Back</button>
     </div>
 </div>
+</div>
+
 </body>
+
 </html>

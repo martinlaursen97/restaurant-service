@@ -1,5 +1,7 @@
 package com.project.restaurantservice.controllers;
 
+import com.project.restaurantservice.models.Order;
+import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.models.User;
 import com.project.restaurantservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +92,26 @@ public class UserController {
             return "login";
         }
         return "redirect:/register";
+    }
+
+    @RequestMapping("/users")
+    public String showUsers(Model model) {
+        model.addAttribute("users", userService.fetchAllUsers());
+        return "users";
+    }
+
+    @RequestMapping(value = "/userSearch", method = RequestMethod.GET)
+    public String userSearch(WebRequest request, Model model) {
+        String id = request.getParameter("id");
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "userSearch";
+    }
+
+    @RequestMapping(value = "/inspectUser", method = RequestMethod.GET)
+    public String inspectUser(@RequestParam(name="userId") String userId, Model model) {
+        User user = userService.findById(userId);
+        model.addAttribute("user", user);
+        return "inspectUser";
     }
 }

@@ -8,7 +8,6 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="test.js"></script>
 </head>
 
 <body>
@@ -34,26 +33,19 @@
 </div>
 
 <div class="center">
-    <div class="order-box-big">
-        <div class="order-box-header">
+    <div class="content-box">
+        <form th:action="@{/searchUser}" class="example" action="#">
+            <input type="text" placeholder="Search.." name="keyword">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
 
-        </div>
-        <div class="order-box-content">
-            <tr th:each="product: ${products}">
-
-                #<td th:text="${product.getProductId()}"></td>.......
-                <td th:text="${product.getProductName()}"></td>.......
-                <td th:text="${product.getPrice()}"></td> kr.
-                <br>
-            </tr>
-            <br>
-            Total: <td th:text="${total}"></td> kr.
-        </div>
-        <div class="order-box-footer">
-            <button onclick="window.location.href = 'http://localhost:8080/finish'">Purchase</button>
-        </div>
+        <a th:href="@{/user(userId=${user.getUserId()})}" class="show-order-box" id="decenter">
+            User ID: #<b><td th:text="${user.getUserId()}" alt=""></td></b>
+            , username: #<b><td th:text="${user.getUsername()}"></td></b>
+        </a>
 
     </div>
 </div>
 </body>
+
 </html>

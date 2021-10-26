@@ -30,4 +30,10 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT o FROM Order o WHERE o.orderNumber = ?1")
     Order searchFor(Long keyword);
+
+    @Query("SELECT o FROM Order o WHERE o.orderNumber = ?1")
+    Order findByOrderNumber(Long keyword);
+
+    @Query(value = "SELECT product_id FROM restaurant.order_products WHERE order_number = ?1", nativeQuery = true)
+    List<Long> getOrderProducts(Long orderNumber);
 }

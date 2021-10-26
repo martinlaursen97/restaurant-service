@@ -4,6 +4,7 @@ package com.project.restaurantservice.controllers;
 import com.project.restaurantservice.models.Order;
 import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.models.User;
+import com.project.restaurantservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,13 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    // hmm
+    private final ProductService productService;
+
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, ProductService productService) {
         this.orderService = orderService;
+        this.productService = productService;
     }
 
     @RequestMapping("/finish")
@@ -70,22 +75,36 @@ public class OrderController {
         Long roleId = user.getUserRole();
         Long userId = user.getUserId();
 
+        List<Order> orders;
         if (roleId == 1L) {
-            List<Order> orders = orderService.getOrdersById(userId);
-            model.addAttribute("orders", orders);
-            return "ordersCustomer";
+            orders = orderService.getOrdersById(userId);
         } else {
-            List<Order> orders = orderService.getAllOrders();
-            model.addAttribute("orders", orders);
-            return "ordersAdmin";
+            orders = orderService.getAllOrders();
         }
+        model.addAttribute("orders", orders);
+        return "orders";
     }
 
     @RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
     public String orderSearch(WebRequest request, Model model) {
         String keyword = request.getParameter("keyword");
         Order order = orderService.searchFor(keyword);
-        model.addAttribute("products2", order);
+        model.addAttribute("order", order);
         return "orderSearch";
+    }
+
+    @RequestMapping(value = "/inspect", method = RequestMethod.GET)
+    public String inspectOrder(@RequestParam(name="orderNumber") Long orderNumber, Model model) {
+        Order order = orderService.findByOrderNumber(orderNumber);
+        model.addAttribute("order", order);
+
+        List<Long> productsId = orderService.getOrderProducts(orderNumber);
+        List<Product> products = productService.getProductsById(productsId);
+        model.addAttribute("products", products);
+
+        Double total = productService.getTotal(products);
+        model.addAttribute("total", total);
+
+        return "inspect";
     }
 }

@@ -137,13 +137,30 @@ body {
     background-color: whitesmoke;
 }
 
+.order-finished-container2 {
+    margin-top: 25px;
+    width: 250px;
+    background-color: whitesmoke;
+}
+.order-finished-btn2 {
+    font-size: 18px;
+    background-color: #007ac1;
+    display: block;
+    width: 250px;
+    color: white;
+    height: 30px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+}
+
 .order-finished-header {
     color: white;
     text-align: center;
     align-content: center;
     font-size: 18px;
     height: 25px;
-    background-color: #007ac1;
+    border: none;
+    padding: 0;
+    background: #007ac1 none;
 }
 
 .order-finished-content {
@@ -162,6 +179,10 @@ body {
 }
 
 .order-finished-btn button:hover {
+    background-color: #02a9f4;
+}
+
+.order-finished-btn2 button:hover {
     background-color: #02a9f4;
 }
 
@@ -203,6 +224,15 @@ body {
     height: 130px;
     width: 130px;
     border: 1px solid grey;
+}
+
+.row {
+    margin-left: 25px;
+    width: 600px;
+    height: 25px;
+    position:relative;
+    display:block;
+    text-align: left;
 }
 
 .container {

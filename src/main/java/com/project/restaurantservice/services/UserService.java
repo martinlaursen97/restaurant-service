@@ -1,5 +1,6 @@
 package com.project.restaurantservice.services;
 
+import com.project.restaurantservice.models.Order;
 import com.project.restaurantservice.models.User;
 import com.project.restaurantservice.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,10 @@ public class UserService {
                            String phone) {
         User user = new User(username, password, email, street, city, zip, phone, 1L);
         userRepository.save(user);
+    }
+
+    public User findById(String id) {
+        return userRepository.findById2(Long.parseLong(id));
     }
 }
 
