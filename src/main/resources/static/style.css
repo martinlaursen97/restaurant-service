@@ -130,6 +130,43 @@ body {
     background-color: whitesmoke;
 }
 
+.order-finished-container {
+    margin-top: 25px;
+    width: 200px;
+    height: 110px;
+    background-color: whitesmoke;
+}
+
+.order-finished-header {
+    color: white;
+    text-align: center;
+    align-content: center;
+    font-size: 18px;
+    height: 25px;
+    background-color: #007ac1;
+}
+
+.order-finished-content {
+    height: 60px;
+}
+
+.order-finished-btn {
+    font-size: 18px;
+    background-color: #007ac1;
+    border: 1px solid grey ;
+    display: block;
+    width: 200px;
+    color: white;
+    height: 30px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+}
+
+.order-finished-btn button:hover {
+    background-color: #02a9f4;
+}
+
+
+
 .order-box-header {
     height: 45px;
     background-color: #007ac1;
@@ -138,6 +175,8 @@ body {
 .order-box-content {
     height: 410px;
 }
+
+
 
 .order-box-footer {
     height: 45px;
