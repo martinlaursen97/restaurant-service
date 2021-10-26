@@ -13,10 +13,10 @@
 
 <body>
 <div class="btn-box">
-    <button onclick="window.location.href = 'http://localhost:8080/menuCustomer'" class="logo">Logo</button>
+    <button onclick="window.location.href = 'http://localhost:8080/menu'" class="logo">Logo</button>
     <div class="center">
         <div class="btn-group">
-            <button onclick="window.location.href = 'http://localhost:8080/menuCustomer'">Menu</button>
+            <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
             <button>Orders</button>
             <button>Users</button>
             <button>Couriers</button>
@@ -34,15 +34,22 @@
 </div>
 
 <div class="center">
+    <div class="order-box-big">
+        <div class="order-box-header">
 
-    <div class="content-box">
-        <tr th:each="product: ${products}">
-            <td th:text="${product.getProductName()}"></td>
-            <br>
-        </tr>
+        </div>
+        <div class="order-box-content">
+            <tr th:each="product: ${products}">
+                <td th:text="${product.getProductName()}"></td>
+                <br>
+            </tr>
+            <td th:text="${total}"></td>
+        </div>
+        <div class="order-box-footer">
+            <button onclick="window.location.href = 'http://localhost:8080/finish'">Purchase</button>
+        </div>
+
     </div>
 </div>
-
 </body>
-
 </html>

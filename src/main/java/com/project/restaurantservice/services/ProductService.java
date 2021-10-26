@@ -20,9 +20,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public void addNewProduct(Product product) {
-        productRepository.save(product);
-    }
+
 
     public List<Product> getProducts() {
         return productRepository.findAll();
@@ -55,5 +53,18 @@ public class ProductService {
             products.add(product);
         }
         return products;
+    }
+
+    public void addNewProduct(String name, Double price, String url, String description) {
+        Product product = new Product(name, price, url, description);
+        productRepository.save(product);
+    }
+
+    public Double getTotal(List<Product> chosenProducts) {
+        Double total = 0.0;
+        for (Product p : chosenProducts) {
+            total += p.getPrice();
+        }
+        return total;
     }
 }

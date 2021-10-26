@@ -121,6 +121,15 @@ body {
     background-color: whitesmoke;
 }
 
+.order-box-big {
+    position: absolute;
+    display: block;
+    width: 400px;
+    height: 500px;
+    margin-top: 25px;
+    background-color: whitesmoke;
+}
+
 .order-box-header {
     height: 45px;
     background-color: #007ac1;

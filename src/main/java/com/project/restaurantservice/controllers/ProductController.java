@@ -2,13 +2,16 @@ package com.project.restaurantservice.controllers;
 
 
 import com.project.restaurantservice.models.Product;
+import com.project.restaurantservice.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.project.restaurantservice.services.ProductService;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,66 +34,87 @@ public class ProductController {
     @RequestMapping(value = "/removeProduct", method = RequestMethod.GET)
     public String removeProduct(@RequestParam(name="productId") Long productId) {
         productService.removeProductById(productId);
-        return "redirect:/menuAdmin";
+        return "redirect:/menu";
     }
 
-    @PostMapping("/productVerify")
-    public String productVerify(Product product) {
-        if (product.getProductName() == null ||  product.getPrice() == null || product.getProductDescription() == null) {
+    @PostMapping("/add")
+    public String add(WebRequest request) {
+
+        try {
+            String name = request.getParameter("name");
+            Double price = Double.parseDouble(request.getParameter("price"));
+            String url = request.getParameter("url");
+            String description = request.getParameter("description");
+
+            if (name.length() == 0 || description.length() == 0 || price <= 0) {
+                return "addProduct";
+            }
+
+            if (url.length() == 0) {
+                url = ("https://baregomad.dk/wp-content/uploads/2020/11/pasta-alla-norma.jpg");
+            }
+
+            productService.addNewProduct(name, price, url, description);
+
+            return "redirect:/menu";
+        } catch (NumberFormatException e) {
             return "addProduct";
         }
-
-        if (product.getProductName().length() < 1 || product.getPrice() <= 0 || product.getProductDescription().length() < 1) {
-            return "addProduct";
-        }
-
-        if (product.getImageUrl().length() == 0) {
-            product.setImageUrl("https://baregomad.dk/wp-content/uploads/2020/11/pasta-alla-norma.jpg");
-        }
-        productService.addNewProduct(product);
-        return "redirect:/menuAdmin";
     }
 
-    @PostMapping("/productConfigVerify")
-    public String productConfigVerify(Product product) {
-        if (product.getProductName() == null ||  product.getPrice() == null || product.getProductDescription() == null) {
-            return "productConfig";
-        }
-
-        if (product.getProductName().length() < 1 || product.getPrice() <= 0 || product.getProductDescription().length() < 1) {
-            return "productConfig";
-        }
-
-        if (product.getImageUrl().length() == 0) {
-            product.setImageUrl("https://baregomad.dk/wp-content/uploads/2020/11/pasta-alla-norma.jpg");
-        }
-
-        product.setProductId(hack);
-        productService.saveConfig(product);
-        return "redirect:/menuAdmin";
-    }
-
-    // ... :/
-    private Long hack = 0L;
-    @RequestMapping(value = "/productConfig", method = RequestMethod.GET)
-    public String productConfig(WebRequest request, Model model) {
-        Long productId = Long.parseLong(Objects.requireNonNull(request.getParameter("productId")));
-        Product product = productService.getById(productId);
-        hack = product.getProductId();
-        model.addAttribute("product", product);
+    // fix later
+    private Long hack;
+    @GetMapping("/productConfig")
+    public String productConfig(@RequestParam(name="productId") Long productId, Model model) {
+        model.addAttribute("productId", productId);
+        hack = productId;
         return "productConfig";
     }
 
-    @RequestMapping("/menuAdmin")
-    public String menuAdmin(Model model) {
-        model.addAttribute("products", productService.getProducts());
-        return "menuAdmin";
+    @PostMapping("/productConfigVerify")
+    public String productConfigVerify(WebRequest request) {
+        Product product = productService.getById(hack);
+
+        try {
+            String name = request.getParameter("name");
+            Double price = Double.parseDouble(Objects.requireNonNull(request.getParameter("price")));
+            String url = request.getParameter("url");
+            String description = request.getParameter("description");
+
+
+
+            if (name.length() == 0 || description.length() == 0 || price <= 0) {
+                return "productConfig";
+            }
+
+            assert url != null;
+            if (url.length() == 0) {
+                url = ("https://baregomad.dk/wp-content/uploads/2020/11/pasta-alla-norma.jpg");
+            }
+
+            product.setProductName(name);
+            product.setPrice(price);
+            product.setImageUrl(url);
+            product.setProductDescription(description);
+            productService.saveConfig(product);
+
+            return "redirect:/menu";
+        } catch (NumberFormatException e) {
+            return "productConfig";
+        }
     }
 
-    @RequestMapping("/menuCustomer")
-    public String menuCustomer(Model model) {
+    @RequestMapping("/menu")
+    public String menu(Model model, WebRequest request) {
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        assert user != null;
+        Long roleId = user.getUserRole();
         model.addAttribute("products", productService.getProducts());
-        return "menuCustomer";
+
+        if (roleId == 1L) {
+            return "menuCustomer";
+        }
+        return "menuAdmin";
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -101,15 +125,19 @@ public class ProductController {
         return "productSearch";
     }
 
-    @RequestMapping("/finish1")
-    public String finishOrder(Model model) {
-        model.addAttribute("products", hack2);
-        return "finishOrder";
+
+
+    @RequestMapping("/showOrder")
+    public String showOrder(Model model, WebRequest request) {
+        List<Product> chosenProducts = (List<Product>) request.getAttribute("chosen", WebRequest.SCOPE_SESSION);
+        model.addAttribute("products", chosenProducts);
+        model.addAttribute("total", productService.getTotal(chosenProducts));
+
+        return "showOrder";
     }
 
-    List<Product> hack2;
-    @RequestMapping(value = "/finish2", method = RequestMethod.POST)
-    public void chosenProducts(@RequestBody(required = false) String[] data) {
-        hack2 = productService.getProductsName(data);
+    @PostMapping("/chosen")
+    public void chosenProducts(@RequestBody(required = false) String[] data, WebRequest request) {
+        request.setAttribute("chosen", productService.getProductsName(data), WebRequest.SCOPE_SESSION);
     }
 }

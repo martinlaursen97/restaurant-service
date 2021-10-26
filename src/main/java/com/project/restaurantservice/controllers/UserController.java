@@ -25,23 +25,34 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(WebRequest request)  {
+    @PostMapping("/loginVerify")
+    public String loginVerify(WebRequest request)  {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        System.out.println("here");
 
         User user = userService.findUserByName(username);
+
+        System.out.println(user);
+        if (user == null) {
+            return "login";
+        }
+
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        System.out.println(username);
-        System.out.println(password);
+
         if (userService.correctDetails(username, password)) {
-            return "menuCustomer";
+            return "redirect:/menu";
         }
         return "login";
     }
 
-    @PostMapping("/register")
-    public String register(WebRequest request) {
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @PostMapping("/registerVerify")
+    public String registerVerify(WebRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -50,10 +61,43 @@ public class UserController {
         String zip = request.getParameter("zip");
         String phone = request.getParameter("phone");
 
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(email);
+        System.out.println(street);
+        System.out.println(city);
+        System.out.println(zip);
+        System.out.println(phone);
+        System.out.println(request);
+
+        if (username == null ||
+                password == null||
+                email == null ||
+                street == null ||
+                city == null ||
+                zip == null ||
+                phone == null ) {
+
+            return "register";
+        }
+
+        int min = 1;
+
+        if (username.length() <= min ||
+            password.length() <= min ||
+            email.length() <= min    ||
+            street.length() <= min   ||
+            city.length() <= min     ||
+            zip.length() <= min      ||
+            phone.length() <= min) {
+
+            return "register";
+        }
+
         if (!userService.usernameTaken(username)) {
             userService.addNewUser(username, password, email, street, city, zip, phone);
             return "login";
         }
-        return "register";
+        return "redirect:/register";
     }
 }

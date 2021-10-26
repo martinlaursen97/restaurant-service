@@ -12,10 +12,10 @@
 
     <body>
         <div class="btn-box">
-            <button onclick="window.location.href = 'http://localhost:8080/menuAdmin'" class="logo">Logo</button>
+            <button onclick="window.location.href = 'http://localhost:8080/menu'" class="logo">Logo</button>
             <div class="center">
                 <div class="btn-group">
-                    <button onclick="window.location.href = 'http://localhost:8080/menuAdmin'">Menu</button>
+                    <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
                     <button>Orders</button>
                     <button>Users</button>
                     <button>Couriers</button>
@@ -34,38 +34,40 @@
 
         <div class="center">
             <div class="container">
-                <form action="#" th:action="@{/productConfigVerify}" th:object="${product}" method="POST">
+                <form name="productConfig" action="/productConfigVerify" method="POST">
                     <div class="col">
                         <div class="col">
                             <div class="form-group">
                                 <label for="name" class="control-label">Product name</label>
-                                <input type="text" class="form-control" id="name" placeholder="name" th:field="*{productName}"/><br>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="name"/><br>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="price" class="control-label">Price</label>
-                                <input type="number" class="form-control" id="price" placeholder="price" th:field="*{price}"/><br>
+                                <input type="number" name="price" class="form-control" id="price" placeholder="price"/><br>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="url" class="control-label">Image url</label>
-                                <input type="text" class="form-control" id="url" placeholder="url" th:field="*{imageUrl}"/><br>
+                                <input type="text" name="url" class="form-control" id="url" placeholder="url"/><br>
                             </div>
                         </div>
 
                         <div class="col">
                             <div class="form-group">
                                 <label for="description" class="control-label">Product description</label>
-                                <input type="text" class="form-control" id="description" placeholder="description" th:field="*{productDescription}"/><br>
+                                <input type="text" name="description" class="form-control" id="description" placeholder="description"/><br>
                             </div>
                         </div>
 
+                        <var value="${productId}" name="productId" id="productId" ></var>
+
                         <div class="col">
                             <div class="form-group">
-                                <button name="post" type="submit" value="0" class="btn btn-primary">save</button>
-                                <button onclick="location.href='http://localhost:8080/menu'" type="button" value="0" class="btn btn-primary">back</button>
+                                <button name="post" type="submit" value="0" class="btn btn-primary">edit</button>
+                                <button onclick="location.href='http://localhost:8080/menuAdmin'" type="button" value="0" class="btn btn-primary">back</button>
                             </div>
                         </div>
                     </div>

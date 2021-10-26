@@ -13,10 +13,10 @@
 
 <body>
 <div class="btn-box">
-    <button onclick="window.location.href = 'http://localhost:8080/menuCustomer'" class="logo">Logo</button>
+    <button onclick="window.location.href = 'http://localhost:8080/menu'" class="logo">Logo</button>
     <div class="center">
         <div class="btn-group">
-            <button onclick="window.location.href = 'http://localhost:8080/menuCustomer'">Menu</button>
+            <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
             <button>Orders</button>
             <button>Users</button>
             <button>Couriers</button>
@@ -42,8 +42,7 @@
             <p id="checks"></p>
         </div>
         <div class="order-box-footer">
-            <button onclick="window.location.href = 'http://localhost:8080/finish1'">Finish</button>
-            <button></button>
+            <button onclick="window.location.href = 'http://localhost:8080/showOrder'">Finish</button>
         </div>
     </div>
     <div class="content-box">
@@ -93,7 +92,7 @@
                                 contentType: "application/json",
                                 type: "POST",
                                 data: JSON.stringify(arr),
-                                url: "/finish2",
+                                url: "/chosen",
                             });
                         }
                     </script>

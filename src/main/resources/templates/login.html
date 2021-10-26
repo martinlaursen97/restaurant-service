@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -9,31 +9,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body style="background-color: #007ac1">
     <div class="btn-box"></div>
     <div class="center">
         <div class="container">
-            <form name="login" action="/login" method="POST">
+            <form name="loginVerify" action="/loginVerify" method="POST">
+
                 <div class="col">
+
                     <div class="col">
                         <div class="form-group">
                             <label for="username" class="control-label">Username</label>
-                            <input type="text" class="form-control" name="username" id="username" value="admin1">
+                            <input type="text" class="form-control" name="username" id="username" value="user1">
                         </div>
                     </div>
+
                     <div class="col">
                         <div class="form-group">
                             <label for="password" class="control-label">Username</label>
                             <input type="text" class="form-control" name="password" id="password" value="123321">
                         </div>
                     </div>
+
                     <div class="col">
                         <div class="form-group">
                             <button name="login" type="submit" value="0" class="btn btn-primary">login</button>
                             <button onclick="location.href='http://localhost:8080/register'" type="button" value="0" class="btn btn-primary">register</button>
                         </div>
                     </div>
+
                 </div>
             </form>
         </div>

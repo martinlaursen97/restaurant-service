@@ -8,14 +8,14 @@ public class User {
 
     @Id
     @SequenceGenerator(
-            name = "customer_sequence",
-            sequenceName = "customer_sequence",
+            name = "user_sequence",
+            sequenceName = "user_sequence",
             allocationSize = 1
     )
 
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "customer_sequence"
+            generator = "user_sequence"
     )
     private Long userId;
 
