@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="dropdown">
-                <button class="dropbtn">Dropdown</button>
+                <button class="dropbtn" th:text="${session.user.username}">Dropdown</button>
                 <div class="dropdown-content">
                     <a href="http://localhost:8080/logout">Logout</a>
                 </div>
