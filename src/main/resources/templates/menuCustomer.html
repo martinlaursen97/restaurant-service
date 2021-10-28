@@ -86,8 +86,11 @@
 
                         let arr = [];
 
+                        window.onload = displayData;
+
 
                         function pushData(data) {
+
 
                             arr.push(data);
 
@@ -95,17 +98,18 @@
                                 contentType: "application/json",
                                 type: "POST",
                                 data: JSON.stringify(arr),
-                                url: "/test",
+                                url: "/choice",
 
                             });
+
                             location.reload()
+
                         }
 
                         function displayData() {
-                            arr = [[${session.test}]];
+                            arr = [[${session.choice}]];
                         }
 
-                        window.onload = displayData;
 
                         /*]]>*/
                     </script>

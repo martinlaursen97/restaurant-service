@@ -10,7 +10,6 @@ import com.project.restaurantservice.services.ProductService;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -111,12 +110,10 @@ public class ProductController {
         Long roleId = user.getUserRole();
         model.addAttribute("products", productService.getProducts());
 
-
-
         if (roleId == 1L) {
             if (request.getAttribute("chosen", WebRequest.SCOPE_SESSION) == null) {
                 request.setAttribute("chosen", new ArrayList<Product>(), WebRequest.SCOPE_SESSION);
-                request.setAttribute("test", new ArrayList<String>(), WebRequest.SCOPE_SESSION);
+                request.setAttribute("choice", new ArrayList<String>(), WebRequest.SCOPE_SESSION);
             }
             return "menuCustomer";
         }
@@ -141,7 +138,7 @@ public class ProductController {
     @RequestMapping(value = "/clear", method = RequestMethod.GET)
     public String clear(WebRequest request) {
         request.removeAttribute("chosen", WebRequest.SCOPE_SESSION);
-        request.removeAttribute("test", WebRequest.SCOPE_SESSION);
+        request.removeAttribute("choice", WebRequest.SCOPE_SESSION);
         return "redirect:/menu";
     }
 
@@ -156,9 +153,9 @@ public class ProductController {
         return "showOrder";
     }
 
-    @RequestMapping("/test")
-    public String chosenTest(@RequestBody(required = false) String[] data, WebRequest request) {
-        request.setAttribute("test", data, WebRequest.SCOPE_SESSION);
+    @RequestMapping("/choice")
+    public String choice(@RequestBody(required = false) String[] data, WebRequest request) {
+        request.setAttribute("choice", data, WebRequest.SCOPE_SESSION);
         request.setAttribute("chosen", productService.getProducts(data), WebRequest.SCOPE_SESSION);
         return "menuCustomer";
     }

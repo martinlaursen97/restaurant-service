@@ -1,7 +1,5 @@
 package com.project.restaurantservice.controllers;
 
-import com.project.restaurantservice.models.Order;
-import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.models.User;
 import com.project.restaurantservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +46,7 @@ public class UserController {
     public String logout(WebRequest request) {
         request.removeAttribute("user", WebRequest.SCOPE_SESSION);
         request.removeAttribute("chosen", WebRequest.SCOPE_SESSION);
-        request.removeAttribute("test", WebRequest.SCOPE_SESSION);
+        request.removeAttribute("choice", WebRequest.SCOPE_SESSION);
 
         return "redirect:/";
     }

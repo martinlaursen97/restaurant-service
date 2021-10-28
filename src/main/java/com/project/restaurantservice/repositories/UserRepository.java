@@ -1,8 +1,6 @@
 package com.project.restaurantservice.repositories;
 
 
-import com.project.restaurantservice.models.Order;
-import com.project.restaurantservice.models.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
