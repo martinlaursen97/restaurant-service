@@ -30,7 +30,7 @@ public class Courier {
 
     public Courier() { }
 
-    public Courier(String firstName, String lastName, String areaZip) {
+    public Courier(String areaZip, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.areaZip = areaZip;

@@ -49,13 +49,13 @@ public class CourierController {
 
 
     @RequestMapping("/addCourier")
-    public String addNewProduct(Model model) {
+    public String addNewCourier(Model model) {
         model.addAttribute("courier", new Courier());
         return "addCourier";
     }
 
     @PostMapping("/addC")
-    public String add(WebRequest request) {
+    public String addC(WebRequest request) {
         try {
             String zip = request.getParameter("zip");
             String firstname = request.getParameter("firstname");
