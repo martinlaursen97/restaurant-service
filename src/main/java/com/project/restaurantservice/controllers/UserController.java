@@ -31,11 +31,9 @@ public class UserController {
     public String loginVerify(WebRequest request)  {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println("here");
 
         User user = userService.findUserByName(username);
 
-        System.out.println(user);
         if (user == null) {
             return "login";
         }

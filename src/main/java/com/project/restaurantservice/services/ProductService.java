@@ -23,11 +23,12 @@ public class ProductService {
 
 
     public List<Product> getProducts() {
-        return productRepository.findAll();
+        return productRepository.findAllActiveProducts();
     }
 
     public void removeProductById(Long productId) {
-        productRepository.deleteById(productId);
+        System.out.println(productId);
+        productRepository.setProductInactive(productId);
     }
 
     public Product getById(Long productId) {
@@ -46,17 +47,14 @@ public class ProductService {
         List<Product> products = new ArrayList<>();
         for (String d : data) {
             Long id = Long.parseLong(d);
-            Product product = productRepository.findById(id)
-                    .orElseThrow(() -> new IllegalStateException(
-                            "id: " + id + ", does not exist.")
-                    );
+            Product product = productRepository.findById2(id);
             products.add(product);
         }
         return products;
     }
 
     public void addNewProduct(String name, Double price, String url, String description) {
-        Product product = new Product(name, price, url, description);
+        Product product = new Product(name, price, url, description, 1);
         productRepository.save(product);
     }
 

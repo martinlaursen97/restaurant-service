@@ -31,13 +31,17 @@ public class Product {
     @Column(name="product_description")
     private String productDescription;
 
+    @Column(name="active")
+    private Integer active;
+
     public Product() { }
 
-    public Product(String productName, Double price, String imageUrl, String productDescription) {
+    public Product(String productName, Double price, String imageUrl, String productDescription, Integer active) {
         this.productName = productName;
         this.price = price;
         this.imageUrl = imageUrl;
         this.productDescription = productDescription;
+        this.active = active;
     }
 
     public Long getProductId() {
@@ -78,6 +82,14 @@ public class Product {
 
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+    }
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+        this.active = active;
     }
 
     @Override
