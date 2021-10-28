@@ -48,6 +48,15 @@ public class UserController {
         return "login";
     }
 
+    @RequestMapping("/logout")
+    public String logout(WebRequest request) {
+        request.removeAttribute("user", WebRequest.SCOPE_SESSION);
+        request.removeAttribute("chosen", WebRequest.SCOPE_SESSION);
+        request.removeAttribute("test", WebRequest.SCOPE_SESSION);
+
+        return "redirect:/";
+    }
+
     @GetMapping("/register")
     public String register() {
         return "register";

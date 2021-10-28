@@ -57,7 +57,6 @@ public class CourierController {
 
     @PostMapping("/addC")
     public String add(WebRequest request) {
-
         try {
             String zip = request.getParameter("zip");
             String firstname = request.getParameter("firstname");
