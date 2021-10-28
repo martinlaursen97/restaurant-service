@@ -38,31 +38,17 @@
         </form>
 
         <tr th:each="order : ${orders}">
-            <div class="object-box" id="decenter">
-                <div class="object-img" th:text="${order.getOrderNumber()}" alt=""></div>
-                <div class="object-text">
-                    <div class="object-title">
-                        <b>
-                            <td th:text="${order.getOrderDate()}"></td>
-                        </b>
-                    </div>
-                    <div class="object-desc">
-                        <br>
-                        <td th:text="${order.getCourierId()}"></td>
-                        <br>
-                    </div>
-                    <div class="object-price">
-                        <b>
-                            <td th:text="${order.getCustomerId()}"></td> kr.
-                        </b>
-                    </div>
-                </div>
-            </div>
+            <a th:href="@{/inspect(orderNumber=${order.getOrderNumber()})}" class="show-order-box" id="decenter">
+                Order number: #<b><td th:text="${order.getOrderNumber()}" alt=""></td></b>
+                , date: #<b><td th:text="${order.getOrderDate()}"></td></b>
+            </a>
         </tr>
 
     </div>
-</div>
 
+    <div class="footer"></div>
+
+</div>
 </body>
 
 </html>

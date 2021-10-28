@@ -77,16 +77,15 @@ public class OrderController {
     public String showOrders(WebRequest request, Model model) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Long roleId = user.getUserRole();
-        Long userId = user.getUserId();
 
         List<Order> orders;
-        if (roleId == 1L) {
-            orders = orderService.getOrdersById(userId);
-        } else {
-            orders = orderService.getAllOrders();
-        }
+        orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
-        return "orders";
+        if (roleId == 1L) {
+            return "ordersCustomer";
+        } else {
+            return "ordersAdmin";
+        }
     }
 
     @RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
@@ -98,12 +97,12 @@ public class OrderController {
         }
 
         Order order = orderService.searchFor(keyword);
-        model.addAttribute("order", order);
-        return "orderSearch";
+        model.addAttribute("orders", order);
+        return "orders";
     }
 
     @RequestMapping(value = "/inspect", method = RequestMethod.GET)
-    public String inspectOrder(@RequestParam(name="orderNumber") Long orderNumber, Model model) {
+    public String inspectOrder(@RequestParam(name="orderNumber") Long orderNumber, Model model, WebRequest request) {
         Order order = orderService.findByOrderNumber(orderNumber);
         model.addAttribute("order", order);
 
@@ -115,6 +114,12 @@ public class OrderController {
         Double total = productService.getTotal(products);
         model.addAttribute("total", total);
 
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Long roleId = user.getUserRole();
+
+        if (roleId == 1L) {
+            return "inspectOrderCustomer";
+        }
         return "inspect";
     }
 }

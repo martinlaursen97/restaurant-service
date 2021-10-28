@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -116,8 +114,8 @@ public class UserController {
         }
 
         User user = userService.findById(keyword);
-        model.addAttribute("user", user);
-        return "userSearch";
+        model.addAttribute("users", user);
+        return "users";
     }
 
     @RequestMapping(value = "/inspectUser", method = RequestMethod.GET)

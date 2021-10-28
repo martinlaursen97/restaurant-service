@@ -1,77 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Add</title>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
-    <body>
-        <div class="btn-box">
-            <button onclick="window.location.href = 'http://localhost:8080/menu'" class="logo">Logo</button>
-            <div class="center">
-                <div class="btn-group">
-                    <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
-                    <button onclick="window.location.href = 'http://localhost:8080/orders'">Orders</button>
-                    <button onclick="window.location.href = 'http://localhost:8080/users'">Users</button>
-                    <button onclick="window.location.href = 'http://localhost:8080/couriers'">Couriers</button>
-                    <button onclick="window.location.href = 'http://localhost:8080/statistics'">Statistics</button>
-                </div>
-            </div>
-            <div class="dropdown">
-                <button class="dropbtn" th:text="${session.user.username}">Dropdown</button>
-                <div class="dropdown-content">
-                    <a href="http://localhost:8080/logout">Logout</a>
-                </div>
-            </div>
+<body>
+<div class="btn-box">
+    <button onclick="window.location.href = 'http://localhost:8080/menu'" class="logo">Logo</button>
+    <div class="center">
+        <div class="btn-group">
+            <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
+            <button onclick="window.location.href = 'http://localhost:8080/orders'">Orders</button>
+            <button onclick="window.location.href = 'http://localhost:8080/users'">Users</button>
+            <button onclick="window.location.href = 'http://localhost:8080/couriers'">Couriers</button>
+            <button onclick="window.location.href = 'http://localhost:8080/statistics'">Statistics</button>
         </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn" th:text="${session.user.username}">Dropdown</button>
+        <div class="dropdown-content">
+            <a href="http://localhost:8080/logout">Logout</a>
+        </div>
+    </div>
+</div>
 
-        <div class="center">
-            <div class="container">
-                <form name="productConfig" action="/productConfigVerify" method="POST">
-                    <div class="col">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="name" class="control-label">Product name</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="name"/><br>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="price" class="control-label">Price</label>
-                                <input type="number" name="price" class="form-control" id="price" placeholder="price"/><br>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="url" class="control-label">Image url</label>
-                                <input type="text" name="url" class="form-control" id="url" placeholder="url"/><br>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="description" class="control-label">Product description</label>
-                                <input type="text" name="description" class="form-control" id="description" placeholder="description"/><br>
-                            </div>
-                        </div>
-
-                        <var value="${productId}" name="productId" id="productId" ></var>
-
-                        <div class="col">
-                            <div class="form-group">
-                                <button name="post" type="submit" value="0" class="btn btn-primary">edit</button>
-                                <button onclick="location.href='http://localhost:8080/menu'" type="button" value="0" class="btn btn-primary">back</button>
-                            </div>
-                        </div>
+<div class="center">
+    <div class="container">
+        <form name="productConfig" action="/productConfigVerify" method="POST">
+            <div class="col">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Product name</label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="name"/><br>
                     </div>
-                </form>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="price" class="control-label">Price</label>
+                        <input type="number" name="price" class="form-control" id="price" placeholder="price"/><br>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="url" class="control-label">Image url</label>
+                        <input type="text" name="url" class="form-control" id="url" placeholder="url"/><br>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label for="description" class="control-label">Product description</label>
+                        <input type="text" name="description" class="form-control" id="description" placeholder="description"/><br>
+                    </div>
+                </div>
+
+                <var value="${productId}" name="productId" id="productId" ></var>
+
+                <div class="col">
+                    <div class="form-group">
+                        <button name="post" type="submit" value="0" class="btn btn-primary">edit</button>
+                        <button onclick="location.href='http://localhost:8080/menu'" type="button" value="0" class="btn btn-primary">back</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </body>
+        </form>
+    </div>
+
+    <div class="footer"></div>
+
+</div>
+</body>
 
 </html>

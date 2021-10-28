@@ -37,8 +37,8 @@ public class CourierController {
         }
 
         Courier courier = courierService.findById(keyword);
-        model.addAttribute("courier", courier);
-        return "courierSearch";
+        model.addAttribute("couriers", courier);
+        return "couriers";
     }
 
     @RequestMapping(value = "/inspectCourier", method = RequestMethod.GET)
