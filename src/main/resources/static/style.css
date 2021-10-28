@@ -15,9 +15,11 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     margin: 0 0 150px;
 }
+
 .footer {
     background-color: #007ac1;
     position: absolute;
