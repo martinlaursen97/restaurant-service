@@ -28,7 +28,7 @@ public class Courier {
     @Column(name="area_zip")
     private String areaZip;
 
-    protected Courier() { }
+    public Courier() { }
 
     public Courier(String firstName, String lastName, String areaZip) {
         this.firstName = firstName;

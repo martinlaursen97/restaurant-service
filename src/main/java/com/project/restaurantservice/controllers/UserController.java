@@ -102,8 +102,13 @@ public class UserController {
 
     @RequestMapping(value = "/userSearch", method = RequestMethod.GET)
     public String userSearch(WebRequest request, Model model) {
-        String id = request.getParameter("id");
-        User user = userService.findById(id);
+        String keyword = request.getParameter("keyword");
+
+        if (keyword == null || keyword.length() == 0) {
+            return "redirect:/users";
+        }
+
+        User user = userService.findById(keyword);
         model.addAttribute("user", user);
         return "userSearch";
     }

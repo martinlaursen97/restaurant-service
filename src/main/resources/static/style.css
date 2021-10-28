@@ -15,6 +15,13 @@ body {
     display: flex;
 }
 
+.center2 {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 30%;
+}
+
 #decenter {
     text-align: left;
     justify-content: left;
@@ -35,7 +42,7 @@ body {
     cursor: pointer; /* Pointer/hand icon */
 }
 
-.add-btn button:hover {
+.add-btn:hover {
     background-color: #02a9f4;
 }
 
@@ -177,7 +184,7 @@ body {
     cursor: pointer; /* Pointer/hand icon */
 }
 
-.order-finished-btn button:hover {
+.order-finished-btn:hover {
     background-color: #02a9f4;
 }
 
@@ -334,10 +341,8 @@ body {
     background-color: whitesmoke;
 }
 
-.object-dlt-btn {
-    font-size: 20px;
-    background-color: red;
-    border: 1px solid grey ;
+.object-btn {
+    border: 1px solid whitesmoke ;
     display: block;
     color: white;
     height: 65px; /* Some padding */
@@ -363,17 +368,6 @@ body {
     background-color: #02a9f4;
     height: 500px;
     width: 500px;
-}
-
-.object-conf-btn {
-    font-size: 20px;
-    background-color: darkseagreen;
-    border: 1px solid grey ;
-    display: block;
-    color: white;
-    height: 65px; /* Some padding */
-    width: 50px;
-    cursor: pointer; /* Pointer/hand icon */
 }
 
 .content-box {

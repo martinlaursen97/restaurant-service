@@ -2,6 +2,7 @@ package com.project.restaurantservice.controllers;
 
 
 import com.project.restaurantservice.models.Courier;
+import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,12 +22,6 @@ public class CourierController {
         this.courierService = courierService;
     }
 
-    @RequestMapping("/addCourier")
-    public void addNewCourier() {
-        Courier courier = new Courier("a", "b", "2635");
-        courierService.addNewCourier(courier);
-    }
-
     @RequestMapping("/couriers")
     public String showCouriers(Model model) {
         model.addAttribute("couriers", courierService.fetchAllCouriers());
@@ -35,8 +30,13 @@ public class CourierController {
 
     @RequestMapping(value = "/courierSearch", method = RequestMethod.GET)
     public String courierSearch(WebRequest request, Model model) {
-        String id = request.getParameter("id");
-        Courier courier = courierService.findById(id);
+        String keyword = request.getParameter("keyword");
+
+        if (keyword == null || keyword.length() == 0) {
+            return "redirect:/couriers";
+        }
+
+        Courier courier = courierService.findById(keyword);
         model.addAttribute("courier", courier);
         return "courierSearch";
     }
@@ -46,5 +46,36 @@ public class CourierController {
         Courier courier = courierService.findById(courierId);
         model.addAttribute("courier", courier);
         return "inspectCourier";
+    }
+
+
+    @RequestMapping("/addCourier")
+    public String addNewProduct(Model model) {
+        model.addAttribute("courier", new Courier());
+        return "addCourier";
+    }
+
+    @PostMapping("/addC")
+    public String add(WebRequest request) {
+
+        try {
+            String zip = request.getParameter("zip");
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+
+            if (zip == null || firstname == null || lastname == null) {
+                return "addCourier";
+            }
+
+            if (zip.length() == 0 || firstname.length() == 0 || lastname.length() == 0) {
+                return "addCourier";
+            }
+
+            courierService.addNewCourier(zip, firstname, lastname);
+
+            return "redirect:/couriers";
+        } catch (NumberFormatException e) {
+            return "addCourier";
+        }
     }
 }

@@ -17,7 +17,8 @@ public class CourierService {
         this.courierRepository = courierRepository;
     }
 
-    public void addNewCourier(Courier courier) {
+    public void addNewCourier(String zip, String firstname, String lastname) {
+        Courier courier = new Courier(zip, firstname, lastname);
         courierRepository.save(courier);
     }
 

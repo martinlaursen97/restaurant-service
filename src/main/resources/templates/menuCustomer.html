@@ -91,7 +91,10 @@
 
                         let arr = [];
 
+                        window.onload = displayData;
+
                         function pushData(data) {
+
                             arr.push(data);
 
                             $.ajax({
@@ -107,8 +110,6 @@
                         function displayData() {
                             arr = [[${session.test}]];
                         }
-
-                        window.onload = displayData;
 
                         /*]]>*/
                     </script>

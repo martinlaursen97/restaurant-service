@@ -107,11 +107,13 @@ public class ProductController {
         Long roleId = user.getUserRole();
         model.addAttribute("products", productService.getProducts());
 
+
+
         if (roleId == 1L) {
             if (request.getAttribute("chosen", WebRequest.SCOPE_SESSION) == null) {
                 request.setAttribute("chosen", new ArrayList<Product>(), WebRequest.SCOPE_SESSION);
                 request.setAttribute("test", new ArrayList<String>(), WebRequest.SCOPE_SESSION);
-                }
+            }
             return "menuCustomer";
         }
         return "menuAdmin";
@@ -151,9 +153,9 @@ public class ProductController {
     }
 
     @RequestMapping("/test")
-    @ResponseBody
-    public void chosenTest(@RequestBody(required = false) String[] data, WebRequest request) {
+    public String chosenTest(@RequestBody(required = false) String[] data, WebRequest request) {
         request.setAttribute("test", data, WebRequest.SCOPE_SESSION);
         request.setAttribute("chosen", productService.getProducts(data), WebRequest.SCOPE_SESSION);
+        return "menuCustomer";
     }
 }

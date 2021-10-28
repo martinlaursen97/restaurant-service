@@ -92,6 +92,11 @@ public class OrderController {
     @RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
     public String orderSearch(WebRequest request, Model model) {
         String keyword = request.getParameter("keyword");
+
+        if (keyword == null || keyword.length() == 0) {
+            return "redirect:/orders";
+        }
+
         Order order = orderService.searchFor(keyword);
         model.addAttribute("order", order);
         return "orderSearch";
