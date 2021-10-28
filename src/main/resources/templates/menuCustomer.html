@@ -36,14 +36,24 @@
 <div class="center">
     <div class="order-box">
         <div class="order-box-header">
+        </div>
 
-        </div>
         <div class="order-box-content">
-            <p id="checks"></p>
+        <tr th:each="name:  ${session.chosen}">
+            Product: <td th:text="${name.productName}"></td>,
+            <td th:text="${name.price}"></td> kr.
+            <br>
+        </tr>
         </div>
-        <div class="order-box-footer">
-            <button onclick="window.location.href = 'http://localhost:8080/showOrder'">Finish</button>
-        </div>
+
+        <div class="order-box-footer-row">
+        <button onclick="window.location.href = 'http://localhost:8080/show'" class="order-box-footer-cont">
+            Continue
+        </button>
+        <a th:href="@{/clear}" class="order-box-footer-clear">
+            Clear
+        </a>
+    </div>
     </div>
     <div class="content-box">
         <form th:action="@{/search}" class="example" action="#">
@@ -73,31 +83,38 @@
                 </div>
                 <div class="object-options">
 
-                    <button class="guga" th:onclick="'javascript:pushData(\'' + ${product.getProductId()} + '\');'" th:value="${product.getProductId()}">test</button>
+                    <button class="order-btn" th:onclick="'javascript:pushData(\'' + ${product.getProductId()} + '\');'" th:value="${product.getProductId()}">Add</button>
 
 
                     <script th:inline="javascript">
-                        const arr = [];
+                        /*<![CDATA[*/
+
+                        let arr = [];
 
                         function pushData(data) {
                             arr.push(data);
-                            var pval = "";
-                            for(var i = 0; i < arr.length; i++) {
-                                pval += arr[i] + "<br>";
-                            }
-
-                            document.getElementById("checks").innerHTML = pval;
 
                             $.ajax({
-
                                 contentType: "application/json",
                                 type: "POST",
                                 data: JSON.stringify(arr),
-                                url: "/chosen",
+                                url: "/test",
+
                             });
+                            location.reload()
                         }
+
+                        function displayData() {
+                            arr = [[${session.test}]];
+                        }
+
+                        window.onload = displayData;
+
+                        /*]]>*/
                     </script>
                 </div>
+            </div>
+            <div class="object-divider">
             </div>
         </tr>
 

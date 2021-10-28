@@ -8,7 +8,6 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="test.js"></script>
 </head>
 
 <body>
@@ -34,26 +33,21 @@
 </div>
 
 <div class="center">
-    <div class="order-box-big">
-        <div class="order-box-header">
+    <div class="content-box">
+        <form th:action="@{/courierSearch}" class="example" action="#">
+            <input type="text" placeholder="Search.." name="id">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
 
-        </div>
-        <div class="order-box-content">
-            <tr th:each="product: ${products}">
-
-                #<td th:text="${product.getProductId()}"></td>.......
-                <td th:text="${product.getProductName()}"></td>.......
-                <td th:text="${product.getPrice()}"></td> kr.
-                <br>
-            </tr>
-            <br>
-            Total: <td th:text="${total}"></td> kr.
-        </div>
-        <button onclick="window.location.href = 'http://localhost:8080/finish'" class="order-box-footer-big">
-            Finish
-        </button>
+        <tr th:each="courier : ${couriers}">
+            <a th:href="@{/inspectCourier(courierId=${courier.getCourierId()})}" class="show-order-box" id="decenter">
+                Courier ID: #<b><td th:text="${courier.getCourierId()}" alt=""></td></b>
+                , zip: #<b><td th:text="${courier.getAreaZip()}"></td></b>
+            </a>
+        </tr>
 
     </div>
 </div>
 </body>
+
 </html>

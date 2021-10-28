@@ -39,6 +39,7 @@ public class OrderService {
     public void assignOrderProducts(List<Product> chosenProducts, Long orderNumber) {
         for (Product p : chosenProducts) {
             orderRepository.assignOrderProducts(p.getProductId(), orderNumber);
+            System.out.println(p.getProductId());
         }
     }
 

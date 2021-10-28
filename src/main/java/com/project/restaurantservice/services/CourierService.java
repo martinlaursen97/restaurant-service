@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.project.restaurantservice.repositories.CourierRepository;
 
+import java.util.List;
+
 @Service
 public class CourierService {
 
@@ -19,4 +21,11 @@ public class CourierService {
         courierRepository.save(courier);
     }
 
+    public List<Courier> fetchAllCouriers() {
+        return courierRepository.findAll();
+    }
+
+    public Courier findById(String id) {
+        return courierRepository.findById2(Long.parseLong(id));
+    }
 }

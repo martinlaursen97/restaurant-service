@@ -42,7 +42,7 @@ public class ProductService {
         return productRepository.searchFor(keyword);
     }
 
-    public List<Product> getProductsName(String[] data) {
+    public List<Product> getProducts(String[] data) {
         List<Product> products = new ArrayList<>();
         for (String d : data) {
             Long id = Long.parseLong(d);
@@ -69,6 +69,26 @@ public class ProductService {
     }
 
     public List<Product> getProductsById(List<Long> productIds) {
-        return productRepository.findAllById(productIds);
+        List<Product> products = new ArrayList<>();
+        for (Long id : productIds) {
+            Product product = productRepository.findById(id)
+                    .orElseThrow(() -> new IllegalStateException(
+                            "id: " + id + ", does not exist.")
+                    );
+            products.add(product);
+        }
+        return products;
+    }
+
+    public String[] getProductNames(String[] data) {
+        String[] names = new String[data.length];
+
+        for (int i = 0; i < data.length; i++) {
+            String d = data[i];
+            Long id = Long.parseLong(d);
+            names[i] = productRepository.getProductName(id);
+        }
+
+        return names;
     }
 }

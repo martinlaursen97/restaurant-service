@@ -61,10 +61,14 @@ public class OrderController {
 
     @GetMapping("/finishOrder")
     public String finishOrder(@RequestParam(value="orderNumber") Long orderNumber,
-                              @RequestParam(value="date") String date, Model model) {
+                              @RequestParam(value="date") String date, Model model, WebRequest request) {
 
         model.addAttribute("orderNumber", orderNumber);
         model.addAttribute("date", date);
+
+        request.removeAttribute("chosen", WebRequest.SCOPE_SESSION);
+
+
 
         return "finishOrder";
     }
@@ -99,6 +103,7 @@ public class OrderController {
         model.addAttribute("order", order);
 
         List<Long> productsId = orderService.getOrderProducts(orderNumber);
+        System.out.println(productsId.size());
         List<Product> products = productService.getProductsById(productsId);
         model.addAttribute("products", products);
 

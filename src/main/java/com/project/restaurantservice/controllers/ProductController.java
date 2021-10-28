@@ -1,6 +1,5 @@
 package com.project.restaurantservice.controllers;
 
-
 import com.project.restaurantservice.models.Product;
 import com.project.restaurantservice.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.project.restaurantservice.services.ProductService;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -81,8 +79,6 @@ public class ProductController {
             String url = request.getParameter("url");
             String description = request.getParameter("description");
 
-
-
             if (name.length() == 0 || description.length() == 0 || price <= 0) {
                 return "productConfig";
             }
@@ -112,6 +108,10 @@ public class ProductController {
         model.addAttribute("products", productService.getProducts());
 
         if (roleId == 1L) {
+            if (request.getAttribute("chosen", WebRequest.SCOPE_SESSION) == null) {
+                request.setAttribute("chosen", new ArrayList<Product>(), WebRequest.SCOPE_SESSION);
+                request.setAttribute("test", new ArrayList<String>(), WebRequest.SCOPE_SESSION);
+                }
             return "menuCustomer";
         }
         return "menuAdmin";
@@ -121,23 +121,39 @@ public class ProductController {
     public String productSearch(WebRequest request, Model model) {
         String keyword = request.getParameter("keyword");
         List<Product> products = productService.searchFor(keyword);
-        model.addAttribute("products2", products);
-        return "productSearch";
+        model.addAttribute("products", products);
+
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Long id = user.getUserRole();
+
+        if (id == 1L) {
+            return "menuCustomer";
+        }
+        return "menuAdmin";
     }
 
+    @RequestMapping(value = "/clear", method = RequestMethod.GET)
+    public String clear(WebRequest request) {
+        request.removeAttribute("chosen", WebRequest.SCOPE_SESSION);
+        request.removeAttribute("test", WebRequest.SCOPE_SESSION);
+        return "redirect:/menu";
+    }
 
-
-    @RequestMapping("/showOrder")
+    @RequestMapping("/show")
     public String showOrder(Model model, WebRequest request) {
         List<Product> chosenProducts = (List<Product>) request.getAttribute("chosen", WebRequest.SCOPE_SESSION);
+        if (chosenProducts == null || chosenProducts.size() == 0) {
+            return "redirect:/menu";
+        }
         model.addAttribute("products", chosenProducts);
         model.addAttribute("total", productService.getTotal(chosenProducts));
         return "showOrder";
     }
 
-    @PostMapping("/chosen")
-    public String chosenProducts(@RequestBody(required = false) String[] data, WebRequest request) {
-        request.setAttribute("chosen", productService.getProductsName(data), WebRequest.SCOPE_SESSION);
-        return "showOrder";
+    @RequestMapping("/test")
+    @ResponseBody
+    public void chosenTest(@RequestBody(required = false) String[] data, WebRequest request) {
+        request.setAttribute("test", data, WebRequest.SCOPE_SESSION);
+        request.setAttribute("chosen", productService.getProducts(data), WebRequest.SCOPE_SESSION);
     }
 }
