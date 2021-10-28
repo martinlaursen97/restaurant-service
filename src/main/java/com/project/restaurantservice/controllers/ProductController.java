@@ -67,12 +67,15 @@ public class ProductController {
     public String productConfig(@RequestParam(name="productId") Long productId, Model model) {
         model.addAttribute("productId", productId);
         hack = productId;
+        Product product = productService.getById(hack);
+        model.addAttribute("prev", product);
         return "productConfig";
     }
 
     @PostMapping("/productConfigVerify")
-    public String productConfigVerify(WebRequest request) {
+    public String productConfigVerify(WebRequest request, Model model) {
         Product product = productService.getById(hack);
+        model.addAttribute("prev", product);
 
         try {
             String name = request.getParameter("name");

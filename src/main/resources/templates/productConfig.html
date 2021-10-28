@@ -37,30 +37,28 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="name" class="control-label">Product name</label>
-                        <input type="text" name="name" class="form-control" id="name" placeholder="name"/><br>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="name" th:value="${prev.getProductName()}"/><br>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label for="price" class="control-label">Price</label>
-                        <input type="number" name="price" class="form-control" id="price" placeholder="price"/><br>
+                        <input type="number" name="price" class="form-control" id="price" placeholder="price" th:value="${prev.getPrice()}"/><br>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label for="url" class="control-label">Image url</label>
-                        <input type="text" name="url" class="form-control" id="url" placeholder="url"/><br>
+                        <input type="text" name="url" class="form-control" id="url" placeholder="url" th:value="${prev.getImageUrl()}"/><br>
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="form-group">
                         <label for="description" class="control-label">Product description</label>
-                        <input type="text" name="description" class="form-control" id="description" placeholder="description"/><br>
+                        <input type="text" name="description" class="form-control" id="description" placeholder="description" th:value="${prev.getProductDescription()}"/><br>
                     </div>
                 </div>
-
-                <var value="${productId}" name="productId" id="productId" ></var>
 
                 <div class="col">
                     <div class="form-group">
