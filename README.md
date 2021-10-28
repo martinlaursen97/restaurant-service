@@ -1,7 +1,7 @@
 # Restaurant service
 
 ## Opgaven
-Lav web madbestillings hjemmeside.
+Lav en madbestillings hjemmeside.
 
 ## How to use
 1. Create a mysql database "restaurant".
