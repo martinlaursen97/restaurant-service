@@ -90,9 +90,15 @@ public class OrderController {
             return "redirect:/orders";
         }
 
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Long roleId = user.getUserRole();
         Order order = orderService.searchFor(keyword);
         model.addAttribute("orders", order);
-        return "orders";
+        if (roleId == 1L) {
+            return "ordersCustomer";
+        } else {
+            return "ordersAdmin";
+        }
     }
 
     @RequestMapping(value = "/inspect", method = RequestMethod.GET)
