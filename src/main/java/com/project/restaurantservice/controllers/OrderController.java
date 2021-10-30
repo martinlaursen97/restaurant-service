@@ -107,7 +107,6 @@ public class OrderController {
         model.addAttribute("order", order);
 
         List<Long> productsId = orderService.getOrderProducts(orderNumber);
-        System.out.println(productsId.size());
         List<Product> products = productService.getProductsById(productsId);
         model.addAttribute("products", products);
 

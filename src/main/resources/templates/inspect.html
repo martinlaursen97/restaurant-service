@@ -12,14 +12,14 @@
 
 <body>
 <div class="btn-box">
-    <button onclick="window.location.href = 'http://localhost:8080/menu'" class="logo">Logo</button>
+    <button type="button" th:onclick="|window.location.href='/menu'|" class="logo">Logo</button>
     <div class="center">
         <div class="btn-group">
-            <button onclick="window.location.href = 'http://localhost:8080/menu'">Menu</button>
-            <button onclick="window.location.href = 'http://localhost:8080/orders'">Orders</button>
-            <button onclick="window.location.href = 'http://localhost:8080/users'">Users</button>
-            <button onclick="window.location.href = 'http://localhost:8080/couriers'">Couriers</button>
-            <button onclick="window.location.href = 'http://localhost:8080/statistics'">Statistics</button>
+            <button type="button" th:onclick="|window.location.href='/menu'|">Menu</button>
+            <button type="button" th:onclick="|window.location.href='/orders'|">Orders</button>
+            <button type="button" th:onclick="|window.location.href='/users'|">Users</button>
+            <button type="button" th:onclick="|window.location.href='/couriers'|">Couriers</button>
+            <button type="button" th:onclick="|window.location.href='/statistics'|">Statistics</button>
         </div>
     </div>
     <div class="dropdown">
@@ -81,7 +81,8 @@
             <td style="color: forestgreen" th:text="${total}"></td> kr.
                 </div>
 
-            <button onclick="window.location.href = 'http://localhost:8080/orders'" class="order-finished-btn2">Back</button>
+            <button type="button" th:onclick="|window.location.href='/orders'|" class="order-finished-btn2">Back</button>
+
 
         </div>
     </div>
