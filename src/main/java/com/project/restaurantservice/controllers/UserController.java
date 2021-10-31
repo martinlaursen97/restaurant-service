@@ -38,9 +38,13 @@ public class UserController {
 
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
 
+        System.out.println(user.getUserRole());
+
         if (userService.correctDetails(username, password)) {
             return "redirect:/menu";
         }
+
+
         return "login";
     }
 
@@ -87,7 +91,7 @@ public class UserController {
             return "register";
         }
 
-        int min = 1;
+        int min = 0;
 
         if (username.length() <= min ||
             password.length() <= min ||
