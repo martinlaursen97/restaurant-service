@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -69,7 +69,7 @@
                     <div class="col">
                         <div class="form-group">
                             <button name="post" type="submit" value="0" class="btn btn-primary">create account</button>
-                            <button onclick="location.href='http://localhost:8080/'" type="button" value="0" class="btn btn-primary">back</button>
+                            <button type="button" th:onclick="|window.location.href='/'|" value="0" class="btn btn-primary">back</button>
                         </div>
                     </div>
 
