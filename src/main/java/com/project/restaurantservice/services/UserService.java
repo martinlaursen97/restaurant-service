@@ -43,8 +43,9 @@ public class UserService {
                            String street,
                            String city,
                            String zip,
-                           String phone) {
-        User user = new User(username, password, email, street, city, zip, phone, 1L);
+                           String phone,
+                           Long  roleN) {
+        User user = new User(username, password, email, street, city, zip, phone, roleN);
         userRepository.save(user);
     }
 

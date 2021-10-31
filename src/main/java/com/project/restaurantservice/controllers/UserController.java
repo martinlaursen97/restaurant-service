@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.Objects;
+
 
 @Controller
 public class UserController {
@@ -65,6 +67,14 @@ public class UserController {
         String city = request.getParameter("city");
         String zip = request.getParameter("zip");
         String phone = request.getParameter("phone");
+        String roleN = request.getParameter("admin");
+
+        long n;
+        if (roleN != null) {
+            n = Long.parseLong(roleN);
+        } else {
+            n = 0L;
+        }
 
         if (username == null ||
                 password == null||
@@ -72,7 +82,7 @@ public class UserController {
                 street == null ||
                 city == null ||
                 zip == null ||
-                phone == null ) {
+                phone == null  ) {
 
             return "register";
         }
@@ -91,7 +101,7 @@ public class UserController {
         }
 
         if (!userService.usernameTaken(username)) {
-            userService.addNewUser(username, password, email, street, city, zip, phone);
+            userService.addNewUser(username, password, email, street, city, zip, phone, n);
             return "login";
         }
         return "redirect:/register";
