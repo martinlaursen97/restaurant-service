@@ -1,6 +1,5 @@
 package com.project.restaurantservice.services;
 
-import com.project.restaurantservice.models.Order;
 import com.project.restaurantservice.models.User;
 import com.project.restaurantservice.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -110,8 +110,6 @@ public class ProductController {
         Long roleId = user.getUserRole();
         model.addAttribute("products", productService.getProducts());
 
-        System.out.println(roleId + ",");
-
         if (roleId == 1L) {
             if (request.getAttribute("chosen", WebRequest.SCOPE_SESSION) == null) {
                 request.setAttribute("chosen", new ArrayList<Product>(), WebRequest.SCOPE_SESSION);

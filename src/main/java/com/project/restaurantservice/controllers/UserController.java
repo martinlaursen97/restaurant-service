@@ -8,9 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.Objects;
-
-
 @Controller
 public class UserController {
     private final UserService userService;
@@ -37,8 +34,6 @@ public class UserController {
         }
 
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-
-        System.out.println(user.getUserRole());
 
         if (userService.correctDetails(username, password)) {
             return "redirect:/menu";
@@ -75,9 +70,9 @@ public class UserController {
 
         long n;
         if (roleN != null) {
-            n = Long.parseLong(roleN);
-        } else {
             n = 0L;
+        } else {
+            n = 1L;
         }
 
         if (username == null ||

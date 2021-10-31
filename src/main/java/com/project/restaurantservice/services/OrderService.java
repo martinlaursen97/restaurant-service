@@ -21,7 +21,6 @@ public class OrderService {
 
     public Long addNewOrder(Long userId, String street, String city, String zip, String dateStr) {
         Order order = new Order(userId, street, city, zip, dateStr);
-        System.out.println(order);
         return orderRepository.save(order).getOrderNumber();
     }
 
